@@ -1,0 +1,111 @@
+<div id="container" (click)="print($event)">
+    <img src="assets/game-background.jpg" usemap="#workmap">
+</div>
+
+<!-- <div id = "hoveredBuilding" *ngIf = "hoveredBuilding != ''" 
+[ngStyle] = "hoveredBuildingNameStyle">
+    {{hoveredBuilding}}
+</div> -->
+
+
+
+<div id = "centerBuildingLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 0 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "woodWarehouseLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 1 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "woodFactoryLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 2 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "stoneWarehouseLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 3 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "stoneMineLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 4 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "cropWarehouseLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 5 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "cropFarmLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 6 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "arsenalLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 7 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "quartersLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 8 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "wallLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 9 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+<div id = "embassyLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 10 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
+    1
+</div>
+
+
+
+
+<map name="workmap" id="buildingsMap">
+    <area shape="poly" coords="1149,399, 1178,380, 1212,353, 1227,334
+    , 1226,191, 1224,141, 1217,138, 1213,175, 1208,164, 1179,144, 1172,122, 1174,85, 1166,67, 1148,51, 1148,23, 1146,22, 1145,51, 1124,73, 1121,93, 1118,132, 1115,160, 1103,147,
+    1077,142, 1066,154, 1058,173, 1055,236, 1053,262, 1030,254, 1019,261, 1021,276, 1021,321, 1021,333, 1050,343, 1063,336, 1056,348, 1056,376, 1076,379, 1101,389, 1136,399"
+    (click)="handleClickedBuilding(0)" (mouseenter)="handleHoveredBuilding($event, 0)" (mouseleave)="handleMouseLeave()">
+
+    <area shape="poly" coords="56,802, 94,796, 95,779, 106,756, 144,749, 163,772, 181,743, 228,735, 244,760, 245,792, 274,811, 287,786, 341,802, 368,821, 366,852, 327,866,
+     274,854, 202,867, 154,870, 137,857, 85,839, 61,803"
+    (click)="handleClickedBuilding(1)" (mouseenter)="handleHoveredBuilding($event, 1)" (mouseleave)="handleMouseLeave()">
+
+    <area shape="poly" coords="1072,738, 1097,743, 1098,730, 1131,701, 1172,687, 1204,721, 1214,725, 1246,764, 1245,797, 1248,827, 1212,854, 1197,847, 1159,857, 1146,869,
+     1114,879, 1122,912, 1093,917, 1052,917, 1007,898, 965,880, 964,861, 979,854, 1013,843, 1049,792, 1071,756"
+    (click)="handleClickedBuilding(2)" (mouseenter)="handleHoveredBuilding($event, 2)" (mouseleave)="handleMouseLeave()">
+
+    <area shape="poly" coords="120,561, 151,540, 177,569, 173,600, 142,629, 109,621, 105,594"
+   (click)="handleClickedBuilding(3)" (mouseenter)="handleHoveredBuilding($event, 3)" (mouseleave)="handleMouseLeave()">
+
+   <area shape="poly" coords="9,537, 22,521, 36,514, 53,523, 56,505, 56,503, 72,505, 72,502, 107,484, 140,520, 137,543, 122,554, 101,586, 96,630, 102,658, 147,686, 149,694,
+    114,718, 77,694, 56,672, 36,673, 24,682, 9,686"
+   (click)="handleClickedBuilding(4)" (mouseenter)="handleHoveredBuilding($event, 4)" (mouseleave)="handleMouseLeave()">
+
+   <area shape="poly" coords="727,561, 760,531, 853,499, 881,543, 890,537, 929,539, 955,542, 1006,545, 1011,576, 1007,589, 983,599, 938,614, 900,619, 867,620, 841,625, 807,626,
+   782,626, 750,622, 721,615, 706,602, 709,591, 724,574"
+   (click)="handleClickedBuilding(5)" (mouseenter)="handleHoveredBuilding($event, 5)" (mouseleave)="handleMouseLeave()">
+
+   <area shape="poly" coords="1098,585, 1088,590, 1068,596, 1051,594, 1028,579, 1018,577, 1020,577, 1030,556, 1038,550, 1058,542, 1070,559, 1087,559, 1109,555, 1109,532,
+   1127,492, 1176,483, 1170,473, 1176,471, 1181,472, 1182,476, 1185,483, 1196,480, 1206,515, 1210,529, 1209,541, 1155,566, 1148,570, 1145,584, 1142,591, 1135,597, 1125,600,
+   1117,597, 1082,595, 1069,600, 1052,595, 1048,592, 1047,584, 1019,579"
+   (click)="handleClickedBuilding(6)" (mouseenter)="handleHoveredBuilding($event, 6)" (mouseleave)="handleMouseLeave()">
+
+   <area shape="poly" coords="605,418, 609,399, 620,400, 639,398, 648,394, 666,389, 664,365, 691,364, 702,375, 719,374, 727,377, 736,365 , 742,347 , 742,335 , 749,332 , 754,334,
+    763,340, 768,342, 772,351, 778,359, 781,368, 790,373, 798,375, 809,384, 815,393, 816,408, 827,410, 834,416, 828,425, 818,429, 810,434, 795,442, 785,447, 782,452, 772,458,
+    756,466, 736,472, 721,465, 699,461, 695,463, 688,456, 686,447, 666,433, 645,430, 623,433, 604,423"
+   (click)="handleClickedBuilding(7)" (mouseenter)="handleHoveredBuilding($event, 7)" (mouseleave)="handleMouseLeave()">
+
+   <area shape="poly" coords="782,465, 796,455, 820,443, 836,434, 862,420, 886,423, 885,436, 885,445, 885,450, 885,462, 885,473, 882,481, 866,488, 855,493, 844,491, 834,498,
+   815,501, 806,506, 794,507, 778,509, 762,506, 756,504, 745,499, 746,493, 755,489, 761,490, 767,491, 775,475"
+   (click)="handleClickedBuilding(8)" (mouseenter)="handleHoveredBuilding($event, 8)" (mouseleave)="handleMouseLeave()">
+
+   <area shape="poly" coords="1294,634, 1253,663, 1204,680, 1161,691, 1144,692, 1122,699, 1104,707, 1015,702, 943,707, 840,706, 735,710, 680,697, 654,682, 643,670, 622,636,
+    620,609, 606,577, 598,560, 581,542, 558,530, 527,516, 529,491, 533,465, 541,435, 541,421, 524,416, 493,409, 458,410, 401,419, 368,420, 344,417, 327,418, 324,397, 327,379,
+    348,378, 381,364, 408,353, 446,347, 481,350, 514,355, 557,357, 590,357, 630,345, 650,336, 681,325, 711,319, 741,319, 764,324, 783,329, 807,329, 828,324, 859,317, 876,324,
+    896,303, 901,284, 926,269, 960,256, 1008,240, 1040,229, 1049,233, 1047,243, 1032,255, 985,271, 963,278, 928,296, 920,312, 920,357, 943,383, 1010,406, 1031,413, 1057,417,
+    1093,415, 1154,411, 1188,397, 1210,373, 1248,323, 1261,300, 1277,279, 1296,275, 1296,295, 1290,327, 1253,380, 1229,410, 1200,431, 1161,441, 1124,456, 1094,468, 1045,467,
+    1014,468, 1009,490, 1001,508, 980,507, 950,502, 920,495, 905,486, 888,426, 882,420, 874,404, 873,381, 865,377, 838,376, 812,366, 791,358, 778,349, 733,347, 714,349, 670,352,
+    654,361, 642,374, 624,386, 601,397, 591,417, 589,430, 587,436, 610,457, 652,491, 680,584, 693,598, 710,616, 809,635, 852,634, 904,632, 1009,603, 1042,611, 1072,617, 1110,617,
+    1148,616, 1186,613, 1235,605, 1266,590, 1289,558"
+   (click)="handleClickedBuilding(9)" (mouseenter)="handleHoveredBuilding($event, 9)" (mouseleave)="handleMouseLeave()">
+
+    <area shape="poly" coords="87,470, 87,439, 99,424, 91,364, 104,348, 107,314, 120,355, 119,389, 135,382, 138,339, 134,313, 126,308, 126,293, 136,287, 148,266, 153,231
+    164,268, 180,287, 176,308, 172,333, 177,369, 186,443, 179,463, 124,478, 88,474"
+     (click)="handleClickedBuilding(10)" (mouseenter)="handleHoveredBuilding($event, 10)" (mouseleave)="handleMouseLeave()">
+</map>
