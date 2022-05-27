@@ -3,9 +3,12 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
+    background-image: url("../../../assets//right-bg.jpg");
+    width: 100%;
+    height: 100vh;
 }
 #loginText{
     align-self: center;
     margin-bottom: 25px;
-    margin-top: 10%;
+    margin-top: 30vh;
 }
