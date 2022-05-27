@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BuildingTypes } from './models/BuildingTypes';
+import { LoginService } from 'src/app/login/login.service';
+import { BuildingsLevels } from '../models/buildingsLevels';
+import { BuildingTypes } from '../models/BuildingTypes';
+import { Village } from '../models/Village';
 
 @Component({
   selector: 'app-main-panel',
@@ -9,40 +12,31 @@ import { BuildingTypes } from './models/BuildingTypes';
 export class MainPanelComponent implements OnInit {
 
   hoveredBuildingIndex: number = -1;
-  //hoveredBuilding: string = "";
-  selectedClass = "selectedBuilding";
-  // hoveredBuildingNameStyle: object = {};
+  village!: Village;
+  constructor(private loginService: LoginService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
+    this.village = this.loginService.userInformation.villages[0];
   }
 
   handleClickedBuilding(index: number)
   {
     console.log(BuildingTypes[index]);
+    //todo make it go to the building component
   }
 
   handleHoveredBuilding(event: any, index: number)
   {
-    //this.hoveredBuilding = BuildingTypes[index].toString();
-    // this.hoveredBuildingNameStyle = {
-    //   'left.px': event.pageX,
-    //   'top.px': event.pageY
-    // };
-    // console.log(this.hoveredBuildingNameStyle);
-
     this.hoveredBuildingIndex = index;
-
   }
 
   handleMouseLeave()
   {
     this.hoveredBuildingIndex = -1;
-    //this.hoveredBuilding = "";
   }
 
-  print(event: any)
+  print(event: any) // for building polygons around buiildings
   {
     // console.log(event.clientX + "," + event.clientY);
   }

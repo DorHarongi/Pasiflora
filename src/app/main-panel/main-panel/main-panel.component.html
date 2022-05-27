@@ -1,56 +1,52 @@
+<app-top-toolbar></app-top-toolbar>
+<app-right-toolbar></app-right-toolbar>
 <div id="container" (click)="print($event)">
-    <img src="assets/game-background.jpg" usemap="#workmap">
+    <img id="village" src="assets/game-background.jpg" usemap="#workmap">
 </div>
-
-<!-- <div id = "hoveredBuilding" *ngIf = "hoveredBuilding != ''" 
-[ngStyle] = "hoveredBuildingNameStyle">
-    {{hoveredBuilding}}
-</div> -->
-
 
 
 <div id = "centerBuildingLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 0 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.centerBuildingLevel}}
 </div>
 
 <div id = "woodWarehouseLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 1 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.woodWarehouseLevel}}
 </div>
 
 <div id = "woodFactoryLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 2 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.woodFactoryLevel}}
 </div>
 
 <div id = "stoneWarehouseLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 3 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.stoneWarehouseLevel}}
 </div>
 
 <div id = "stoneMineLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 4 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.stoneMineLevel}}
 </div>
 
 <div id = "cropWarehouseLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 5 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.cropWarehouseLevel}}
 </div>
 
 <div id = "cropFarmLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 6 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.cropFarmLevel}}
 </div>
 
 <div id = "arsenalLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 7 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.arsenalLevel}}
 </div>
 
 <div id = "quartersLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 8 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.quartersLevel}}
 </div>
 
 <div id = "wallLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 9 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.wallLevel}}
 </div>
 
 <div id = "embassyLevel" class = "buildingLevels" [ngClass] = "hoveredBuildingIndex == 10 ? 'selectedBuildingLevel' : 'unselectedBuildingLevel'">
-    1
+    {{village.buildingsLevels.embassyLevel}}
 </div>
 
 

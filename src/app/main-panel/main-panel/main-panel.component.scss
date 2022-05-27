@@ -11,15 +11,21 @@
     background-color: white;
 }
 
+#village{
+    display: block;
+}
+
 .buildingLevels{
     width: 25px;
     height: 25px;
     position: absolute;
     text-align: center;
-    padding-top: 2px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     border-radius: 50px;
     font-weight: bolder;
+    padding-top: 2px;
+    line-height: normal;
+    box-sizing: content-box !important;
     font-size: large;
     border: 1px black solid;
 }
@@ -86,5 +92,6 @@
     left: 135px;
     top: 370px;
 }
+
 
 
