@@ -1,11 +1,8 @@
 #container {
     background: url("../../../assets/right-bg.jpg");
     height: 100%;
-    width: 100%;
-    left: 1296px;
-    top: 7.5%;
     border-left: 2px black solid;
-    position: fixed;
+    position: absolute;
 }
 
 .subContainer {

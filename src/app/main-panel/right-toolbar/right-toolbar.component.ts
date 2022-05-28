@@ -14,6 +14,8 @@ export class RightToolbarComponent implements OnInit {
   woodProduction!: number;
   stoneProduction!: number;
 
+  widthStyle = {};
+
   spearFighters!: number;
   swordFighters!: number;
   axeFighters!: number;
@@ -35,6 +37,10 @@ export class RightToolbarComponent implements OnInit {
     this.magicians = this.loginService.userInformation.villages[0].troops.troop5Amount;
     this.horsemen = this.loginService.userInformation.villages[0].troops.troop6Amount;
     this.catapults = this.loginService.userInformation.villages[0].troops.troop7Amount;
-  }
 
+    this.widthStyle = {
+      "width": screen.width - 1296 + "px"
+    };
+
+  }
 }
