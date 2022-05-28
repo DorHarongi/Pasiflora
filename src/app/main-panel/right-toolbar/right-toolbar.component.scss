@@ -1,8 +1,54 @@
-#container{
+#container {
     background: url("../../../assets/right-bg.jpg");
     height: 100%;
     width: 100%;
     left: 1296px;
     top: 7.5%;
+    border-left: 2px black solid;
     position: fixed;
+}
+
+.subContainer {
+    width: 250px;
+    margin-left: 30px;
+    margin-top: 30px;
+    background: url("../../../assets/top-bg.png");
+    border: 2px black solid;
+    box-shadow: 2px 2px 2px 2px;
+}
+
+#troops {
+    height: 450px;
+}
+
+#production {
+    height: 250px;
+}
+
+h4 {
+    margin-top: 25px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.flex-container {
+    margin-top: 10px;
+    display: flex;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.production-container {
+    justify-content: center;
+}
+
+.troops-container{
+    justify-content: start;
+    margin-left: 26px;
+}
+
+.material {
+    width: 25px;
+    height: 25px;
+    margin-right: 7px;
 }
