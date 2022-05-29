@@ -1,10 +1,10 @@
 export enum BuildingTypes{
     CenterBuilding,
-    WoodWareHouse,
+    WoodWarehouse,
     WoodFactory,
-    StoneWareHouse,
+    StoneWarehouse,
     StoneMine,
-    CropWareHouse,
+    CropWarehouse,
     CropFarm,
     Arsenal,
     Quarters,
