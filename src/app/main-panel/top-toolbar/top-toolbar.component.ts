@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login/login.service';
+import { UserInformationService } from 'src/app/user-information/user-information.service';
+import { ResourcesAmounts } from '../models/resourcesAmounts';
 
 @Component({
   selector: 'app-top-toolbar',
@@ -13,14 +15,17 @@ export class TopToolbarComponent implements OnInit {
   cropAmount!: number;
   math = Math;
 
-  constructor(private loginSevice: LoginService) { 
-    this.woodAmount = loginSevice.userInformation.villages[0].resourcesAmounts.woodAmount;
-    this.stonesAmount = loginSevice.userInformation.villages[0].resourcesAmounts.stonesAmount;
-    this.cropAmount = loginSevice.userInformation.villages[0].resourcesAmounts.cropAmount;
+  constructor(private userInformationService: UserInformationService) { 
+    this.woodAmount = this.userInformationService.currentVillage.resourcesAmounts.woodAmount;
+    this.stonesAmount = this.userInformationService.currentVillage.resourcesAmounts.stonesAmount;
+    this.cropAmount = this.userInformationService.currentVillage.resourcesAmounts.cropAmount;
     setInterval(()=>{
-      this.woodAmount += loginSevice.userInformation.villages[0].woodProductionPerSecond;
-      this.stonesAmount += loginSevice.userInformation.villages[0].stoneProductionPerSecond;
-      this.cropAmount += loginSevice.userInformation.villages[0].cropProductionPerSecond;
+      this.woodAmount += this.userInformationService.currentVillage.woodProductionPerSecond;
+      this.stonesAmount += this.userInformationService.currentVillage.stoneProductionPerSecond;
+      this.cropAmount += this.userInformationService.currentVillage.cropProductionPerSecond;
+
+      this.userInformationService.updateResourcesAmount(new ResourcesAmounts(this.woodAmount, this.stonesAmount, this.cropAmount));
+
     }, 1000)
   }
 

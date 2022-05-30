@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/login/login.service';
-import { BuildingsLevels } from '../models/buildingsLevels';
+import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { BuildingTypes } from '../models/BuildingTypes';
 import { Village } from '../models/Village';
 
@@ -14,11 +13,11 @@ export class MainPanelComponent implements OnInit {
 
   hoveredBuildingIndex: number = -1;
   village!: Village;
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private userInformationService: UserInformationService, private router: Router) { }
 
   ngOnInit(): void
   {
-    this.village = this.loginService.userInformation.villages[0];
+    this.village = this.userInformationService.currentVillage;
   }
 
   handleClickedBuilding(index: number)

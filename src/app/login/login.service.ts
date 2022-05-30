@@ -2,16 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { User } from '../main-panel/models/User';
+import { UserInformationService } from '../user-information/user-information.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   isloggedIn: boolean;
-  userInformation!: User;
 
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userInformationService: UserInformationService) {
     this.isloggedIn = false;
    }
    
@@ -24,7 +23,7 @@ export class LoginService {
      })
       observable.subscribe((user)=>{
         this.isloggedIn = true;
-        this.userInformation = user;
+        this.userInformationService.setUserInformation(user);
     })
     return observable;
     }

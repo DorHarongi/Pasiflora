@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login/login.service';
+import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../models/Building';
 
 @Component({
@@ -10,8 +11,8 @@ import { Building } from '../../models/Building';
 export class CropWarehouseComponent implements OnInit {
 
   buildingInformation: Building;
-  constructor(loginService: LoginService) { 
-    this.buildingInformation = new Building("Crop Warehouse", loginService.userInformation.villages[0].buildingsLevels.cropWarehouseLevel, 
+  constructor(private userInformationService: UserInformationService) { 
+    this.buildingInformation = new Building("Crop Warehouse", this.userInformationService.currentVillage.buildingsLevels.cropWarehouseLevel, 
     "The crop warehouse stores the crop of your village. The higher its level, the more crop you can store.");
   }
 
