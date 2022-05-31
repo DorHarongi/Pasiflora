@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login/login.service';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
-import { Building } from '../../models/Building';
+import { Building } from '../../classes/Building';
 
 @Component({
   selector: 'app-crop-warehouse',

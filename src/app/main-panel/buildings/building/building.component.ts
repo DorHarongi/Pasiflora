@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Building } from '../../models/Building';
+import { Building } from '../../classes/Building';
 
 @Component({
   selector: 'app-building',
