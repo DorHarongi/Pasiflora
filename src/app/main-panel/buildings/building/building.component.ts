@@ -5,7 +5,7 @@ import { Building } from '../../classes/Building';
 @Component({
   selector: 'app-building',
   templateUrl: './building.component.html',
-  styleUrls: ['./building.component.scss']
+  styleUrls: ['./building.component.scss'],
 })
 export class BuildingComponent implements OnInit {
 
@@ -13,6 +13,7 @@ export class BuildingComponent implements OnInit {
 
   @Input()
   building!: Building;
+  
 
   ngOnInit(): void {
   }
@@ -20,6 +21,10 @@ export class BuildingComponent implements OnInit {
   goBack()
   {
     this.router.navigateByUrl('home');
+  }
+
+  upgrade(): void{
+    
   }
 
 }

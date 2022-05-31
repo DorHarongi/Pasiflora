@@ -15,18 +15,20 @@ export class WoodWarehouseComponent implements OnInit {
   buildingInformation: Building;
   currentMaximumStorage!: number;
   nextLevelMaximumStorage!: number;
-  levelUpMaterialCost!: MaterialsCost;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.buildingInformation = new Building("Wood Warehouse", this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel, 
-    "The wood warehouse stores the wood of your village. The higher its level, the more wood you can store.");
+    this.buildingInformation = new Building("Wood Warehouse",
+     this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel, 
+    "The wood warehouse stores the wood of your village. The higher its level, the more wood you can store.", 
+    woodWarehouseUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel + 1]);
 
     this.currentMaximumStorage = warehouseStorageByLevel[this.buildingInformation.level];
     this.nextLevelMaximumStorage = warehouseStorageByLevel[this.buildingInformation.level + 1];
-    this.levelUpMaterialCost = woodWarehouseUpgradeMaterialCostByLevels[this.buildingInformation.level + 1];
+
   }
 
   ngOnInit(): void {
   }
+
 
 }

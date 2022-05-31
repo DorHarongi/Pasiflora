@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/login/login.service';
+import { woodWarehouseUpgradeMaterialCostByLevels } from 'utils';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../classes/Building';
 
@@ -13,7 +13,8 @@ export class QuartersComponent implements OnInit {
   buildingInformation: Building;
   constructor(private userInformationService: UserInformationService) { 
     this.buildingInformation = new Building("Quarters", this.userInformationService.currentVillage.buildingsLevels.quartersLevel, 
-    "The quarters of your village population. Level it up to increase your maximum population so you can train more troops and workers.");
+    "The quarters of your village population. Level it up to increase your maximum population so you can train more troops and workers.",
+    woodWarehouseUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel + 1]);
   }
 
   ngOnInit(): void {

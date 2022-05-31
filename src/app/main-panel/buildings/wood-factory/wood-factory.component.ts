@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/login/login.service';
+import { woodWarehouseUpgradeMaterialCostByLevels } from 'utils';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../classes/Building';
 
@@ -11,9 +11,10 @@ import { Building } from '../../classes/Building';
 export class WoodFactoryComponent implements OnInit {
 
   buildingInformation: Building;
-  constructor(userInformationService: UserInformationService) { 
+  constructor(private userInformationService: UserInformationService) { 
     this.buildingInformation = new Building("Wood Factory", userInformationService.currentVillage.buildingsLevels.woodFactoryLevel, 
-    "The wood factory produces the wood of your village. The higher its level and the more wood workers you employ there, the faster the production is.");
+    "The wood factory produces the wood of your village. The higher its level and the more wood workers you employ there, the faster the production is.",
+    woodWarehouseUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel + 1]);
   }
 
   ngOnInit(): void {
