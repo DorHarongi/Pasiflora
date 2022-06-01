@@ -1,1 +1,11 @@
-<app-building [building]="buildingInformation"></app-building>
+<app-building [building]="buildingInformation">
+    <div sample class="center">
+        <div *ngIf = "buildingInformation.level < embassyMinimumLevelForClanJoin">
+            <h5> You can only join a clan once your embassy reaches level  {{embassyMinimumLevelForClanJoin}}</h5>
+        </div>
+        <div *ngIf = "buildingInformation.level >= embassyMinimumLevelForClanJoin">
+            <h5> Current maximum support troops: {{currentMaximumDefenceTroops}}</h5>
+            <h5> Next level maximum support troops : {{nextLevelMaximumDefenceTroops}}</h5>
+        </div>
+    </div>
+</app-building>

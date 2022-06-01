@@ -1,1 +1,7 @@
-<app-building [building]="buildingInformation"></app-building>
+<app-building [building]="buildingInformation">
+    <div sample class="center">
+        <div *ngIf = "nextLevelUnlock">
+            <h5> Next level unlocks: {{nextLevelUnlock}} </h5>
+        </div>
+    </div>
+</app-building>
