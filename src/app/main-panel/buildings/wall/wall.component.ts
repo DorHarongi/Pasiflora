@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { woodWarehouseUpgradeMaterialCostByLevels } from 'utils';
+import { wallUpgradeMaterialCostByLevels } from 'utils';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../classes/Building';
 
@@ -14,7 +14,7 @@ export class WallComponent implements OnInit {
   constructor(private userInformationService: UserInformationService) { 
     this.buildingInformation = new Building("Wall", this.userInformationService.currentVillage.buildingsLevels.wallLevel, 
     "The wall is your village first layer of defense. The higher level it is, the harder it will be for attackers to reach your village",
-    woodWarehouseUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel + 1]);
+    wallUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.wallLevel + 1]);
   }
 
   ngOnInit(): void {

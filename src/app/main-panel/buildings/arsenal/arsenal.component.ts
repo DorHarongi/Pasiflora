@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { woodWarehouseUpgradeMaterialCostByLevels } from 'utils'
+import { arsenalUpgradeMaterialCostByLevels } from 'utils'
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../classes/Building';
 
@@ -14,7 +14,7 @@ export class ArsenalComponent implements OnInit {
   constructor(private userInformationService: UserInformationService) { 
     this.buildingInformation = new Building("Arsenal", this.userInformationService.currentVillage.buildingsLevels.arsenalLevel,
     "In the arsenal you can train your army troops. Level up your arsenal to unlock new troops",
-    woodWarehouseUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel + 1]);
+    arsenalUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.arsenalLevel + 1]);
   }
 
   ngOnInit(): void {
