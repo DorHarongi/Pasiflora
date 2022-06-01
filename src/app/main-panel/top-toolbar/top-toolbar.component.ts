@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { warehouseStorageByLevel } from 'utils';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { ResourcesAmounts } from '../models/resourcesAmounts';
@@ -8,7 +8,7 @@ import { ResourcesAmounts } from '../models/resourcesAmounts';
   templateUrl: './top-toolbar.component.html',
   styleUrls: ['./top-toolbar.component.scss']
 })
-export class TopToolbarComponent implements OnInit {
+export class TopToolbarComponent implements OnInit, OnDestroy {
 
   woodAmount!: number;
   stonesAmount!: number;
@@ -20,11 +20,13 @@ export class TopToolbarComponent implements OnInit {
   
   math = Math;
 
+  interval;
+
   constructor(private userInformationService: UserInformationService) { 
     this.woodAmount = this.userInformationService.currentVillage.resourcesAmounts.woodAmount;
     this.stonesAmount = this.userInformationService.currentVillage.resourcesAmounts.stonesAmount;
     this.cropAmount = this.userInformationService.currentVillage.resourcesAmounts.cropAmount;
-    setInterval(()=>{
+    this.interval = setInterval(()=>{
       this.woodAmount += this.userInformationService.currentVillage.woodProductionPerSecond;
       this.stonesAmount += this.userInformationService.currentVillage.stoneProductionPerSecond;
       this.cropAmount += this.userInformationService.currentVillage.cropProductionPerSecond;
@@ -44,6 +46,9 @@ export class TopToolbarComponent implements OnInit {
     this.maxStonesStorage = warehouseStorageByLevel[this.userInformationService.currentVillage.buildingsLevels.stoneWarehouseLevel];
     this.maxCropStorage = warehouseStorageByLevel[this.userInformationService.currentVillage.buildingsLevels.cropWarehouseLevel];
 
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 
   ngOnInit(): void {

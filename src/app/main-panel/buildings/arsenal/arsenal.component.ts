@@ -14,7 +14,7 @@ export class ArsenalComponent implements OnInit {
   nextLevelUnlock: string;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.buildingInformation = new Building("Arsenal", this.userInformationService.currentVillage.buildingsLevels.arsenalLevel,
+    this.buildingInformation = new Building("arsenal", "Arsenal", this.userInformationService.currentVillage.buildingsLevels.arsenalLevel,
     "In the arsenal you can train your army troops. Level up your arsenal to unlock new troops",
     arsenalUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.arsenalLevel + 1]);
     this.nextLevelUnlock = troopUnlockByLevel[this.userInformationService.currentVillage.buildingsLevels.arsenalLevel + 1];

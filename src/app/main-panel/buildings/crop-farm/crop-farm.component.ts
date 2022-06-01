@@ -16,7 +16,7 @@ export class CropFarmComponent implements OnInit {
   singleWorkerProductionPerHour: number;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.buildingInformation = new Building("Crop Farm", this.userInformationService.currentVillage.buildingsLevels.cropFarmLevel, 
+    this.buildingInformation = new Building("cropFarm", "Crop Farm", this.userInformationService.currentVillage.buildingsLevels.cropFarmLevel, 
     "The crop farm produces the crop of your village. The higher its level and the more crop workers you employ there, the faster the production is.",
     cropFarmUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.cropFarmLevel + 1]);
 

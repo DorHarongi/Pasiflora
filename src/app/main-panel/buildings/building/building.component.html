@@ -7,12 +7,12 @@
     <h5 id = "requirementsText" class="center"> Level up Requirements: </h5>
     <div id="materialsContainer" class="center">
         <img class="materials" src="../../../assets/crop.jpg">
-        <h5 class = "costTexts"> {{building.levelUpMaterialCost.crop}}</h5>
+        <h5 class = "costTexts" [ngClass] = "checkIfEnoughCropToUpgrade() ? 'enoughMaterial' : 'missingMaterial'"> {{building.levelUpMaterialCost.crop}}</h5>
         <img class="materials" src="../../../assets/wood.jpg">
-        <h5 class = "costTexts"> {{building.levelUpMaterialCost.wood}}</h5>
+        <h5 class = "costTexts" [ngClass] = "checkIfEnoughWoodToUpgrade() ? 'enoughMaterial' : 'missingMaterial'"> {{building.levelUpMaterialCost.wood}}</h5>
         <img class="materials" src="../../../assets/rock.jpg">
-        <h5 class = "costTexts"> {{building.levelUpMaterialCost.stones}} </h5>
+        <h5 class = "costTexts" [ngClass] = "checkIfEnoughStonesToUpgrade() ? 'enoughMaterial' : 'missingMaterial'"> {{building.levelUpMaterialCost.stones}} </h5>
     </div>
-    <button id = "upgrade" class ="buttons center" (click)="upgrade()"> Upgrade </button>
+    <button id = "upgrade" class ="buttons center" (click)="upgrade()" [disabled]="checkIfEnoughMaterialsToUpgrade() == false"> Upgrade </button>
     <button id = "back" class="buttons center" (click)="goBack()"> Back </button>
 </div>

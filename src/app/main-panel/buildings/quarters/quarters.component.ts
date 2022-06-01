@@ -15,7 +15,7 @@ export class QuartersComponent implements OnInit {
   nextLevelMaximumPopulation: number;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.buildingInformation = new Building("Quarters", this.userInformationService.currentVillage.buildingsLevels.quartersLevel, 
+    this.buildingInformation = new Building("quarters", "Quarters", this.userInformationService.currentVillage.buildingsLevels.quartersLevel, 
     "The quarters of your village population. Level it up to increase your maximum population so you can train more troops and workers.",
     quartersUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.quartersLevel + 1]);
 

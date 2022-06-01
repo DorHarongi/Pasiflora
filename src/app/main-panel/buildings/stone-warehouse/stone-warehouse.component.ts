@@ -15,7 +15,7 @@ export class StoneWarehouseComponent implements OnInit {
   nextLevelMaximumStorage!: number;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.buildingInformation = new Building("Stone Warehouse", this.userInformationService.currentVillage.buildingsLevels.stoneWarehouseLevel, 
+    this.buildingInformation = new Building("stoneWarehouse", "Stone Warehouse", this.userInformationService.currentVillage.buildingsLevels.stoneWarehouseLevel, 
     "The stone warehouse stores the stones of your village. The higher its level, the more stones you can store.",
     stoneWarehouseUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.stoneWarehouseLevel + 1]);
 

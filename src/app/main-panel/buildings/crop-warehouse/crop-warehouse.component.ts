@@ -15,7 +15,7 @@ export class CropWarehouseComponent implements OnInit {
   nextLevelMaximumStorage!: number;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.buildingInformation = new Building("Crop Warehouse", this.userInformationService.currentVillage.buildingsLevels.cropWarehouseLevel, 
+    this.buildingInformation = new Building("cropWarehouse", "Crop Warehouse", this.userInformationService.currentVillage.buildingsLevels.cropWarehouseLevel, 
     "The crop warehouse stores the crop of your village. The higher its level, the more crop you can store.",
     cropWarehouseUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.cropWarehouseLevel + 1]);
 

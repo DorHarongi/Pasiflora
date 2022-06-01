@@ -16,7 +16,7 @@ export class StoneMineComponent implements OnInit {
   singleWorkerProductionPerHour: number;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.buildingInformation = new Building("Stone Mine", this.userInformationService.currentVillage.buildingsLevels.stoneMineLevel, 
+    this.buildingInformation = new Building("stoneMine", "Stone Mine", this.userInformationService.currentVillage.buildingsLevels.stoneMineLevel, 
     "The stone mine produces the stones of your village. The higher its level and the more wood workers you employ there, the faster the production is.",
     stoneMineUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.stoneMineLevel + 1]);
 

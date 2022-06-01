@@ -21,7 +21,7 @@ export class LoginService {
        username: username,
        password: password
      })
-      observable.subscribe((user)=>{
+      observable.subscribe((user: User)=>{
         this.isloggedIn = true;
         this.userInformationService.setUserInformation(user);
     })

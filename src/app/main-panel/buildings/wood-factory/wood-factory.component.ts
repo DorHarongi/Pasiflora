@@ -16,7 +16,7 @@ export class WoodFactoryComponent implements OnInit {
   singleWorkerProductionPerHour: number;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.buildingInformation = new Building("Wood Factory", userInformationService.currentVillage.buildingsLevels.woodFactoryLevel, 
+    this.buildingInformation = new Building("woodFactory", "Wood Factory", userInformationService.currentVillage.buildingsLevels.woodFactoryLevel, 
     "The wood factory produces the wood of your village. The higher its level and the more wood workers you employ there, the faster the production is.",
     woodFactoryUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.woodFactoryLevel + 1]);
 

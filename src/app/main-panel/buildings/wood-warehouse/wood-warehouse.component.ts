@@ -17,7 +17,7 @@ export class WoodWarehouseComponent implements OnInit {
   nextLevelMaximumStorage!: number;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.buildingInformation = new Building("Wood Warehouse",
+    this.buildingInformation = new Building("woodWarehouse", "Wood Warehouse",
      this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel, 
     "The wood warehouse stores the wood of your village. The higher its level, the more wood you can store.", 
     woodWarehouseUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel + 1]);
