@@ -1,5 +1,5 @@
 <app-building [building]="buildingInformation">
-    <div sample class="center">
+    <div extraInformation class="center">
         <div *ngIf = "buildingInformation.level < embassyMinimumLevelForClanJoin">
             <h5> You can only join a clan once your embassy reaches level  {{embassyMinimumLevelForClanJoin}}</h5>
         </div>
