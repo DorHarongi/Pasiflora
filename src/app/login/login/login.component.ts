@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     ) {
         // redirect to home if already logged in
         if (this.loginService.isUserLoggedIn()) {
-            this.router.navigate(['/']);
+            this.router.navigate(['home']);
         }
     }
 
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
         await this.loginService.login(this.form['username'].value, this.form['password'].value).subscribe(()=>{
-          this.router.navigate(['']);
+          this.router.navigate(['home']);
         },()=>{
           this.loading = false;
         })
