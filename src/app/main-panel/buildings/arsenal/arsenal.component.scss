@@ -1,8 +1,9 @@
 .center{
     align-self: center;
+    text-align: center;
 }
 #troopsTraining{
-    margin-top: 50px;
+    margin-top: 25px;
 }
 .troopsImages{
     width: 25px;
@@ -29,37 +30,40 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-#materialsContainer {
-    display: flex;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    align-items: center;
-}
-
-.materials {
-    margin-right: 10px;
-    width: 45px;
-    height: 45px;
-}
-
-.costTexts {
-    margin-right: 10px;
-}
-
-.missingMaterial{
-    color: red;
-}
-
-.enoughMaterial{
-    color: black;
-}
-
 .attackDefenceIcons{
     width: 25px;
     height: 25px;
 }
 
+.attack{
+    margin-bottom:10px;
+    margin-top: 10px;
+}
+
 .attackDefence{
   display: flex;  
   justify-content: center;
+}
+
+.buttons {
+    background-image: url(../../../../assets/top-bg.png);
+    border: 1px black solid;
+    outline: none;
+    border-radius: 0.25rem;
+    box-shadow: 2px 2px 2px 2px;
+}
+
+#train{
+    width: 100px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+}
+
+#trainTroops{
+    margin-top:25px;
+    border: 4px black solid;
+    border-radius: 0.25rem;
+    box-shadow: 2px 2px 2px 2px;
+    padding: 25px 50px 25px 50px;
 }

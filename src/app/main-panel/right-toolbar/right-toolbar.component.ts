@@ -31,13 +31,13 @@ export class RightToolbarComponent implements OnInit {
     this.woodProduction = this.userInformationService.currentVillage.woodProductionPerSecond * 3600;
     this.stoneProduction =this.userInformationService.currentVillage.stoneProductionPerSecond * 3600;
 
-    this.spearFighters = this.userInformationService.currentVillage.troops.troop1Amount;
-    this.swordFighters = this.userInformationService.currentVillage.troops.troop2Amount;
-    this.axeFighters = this.userInformationService.currentVillage.troops.troop3Amount;
-    this.archers = this.userInformationService.currentVillage.troops.troop4Amount;
-    this.magicians = this.userInformationService.currentVillage.troops.troop5Amount;
-    this.horsemen = this.userInformationService.currentVillage.troops.troop6Amount;
-    this.catapults = this.userInformationService.currentVillage.troops.troop7Amount;
+    this.spearFighters = this.userInformationService.currentVillage.troops.spearFighters;
+    this.swordFighters = this.userInformationService.currentVillage.troops.swordFighters;
+    this.axeFighters = this.userInformationService.currentVillage.troops.axeFighters;
+    this.archers = this.userInformationService.currentVillage.troops.archers;
+    this.magicians = this.userInformationService.currentVillage.troops.magicians;
+    this.horsemen = this.userInformationService.currentVillage.troops.horsemen;
+    this.catapults = this.userInformationService.currentVillage.troops.catapults;
 
     this.widthStyle = {
       "width": screen.width - 1296 + "px"

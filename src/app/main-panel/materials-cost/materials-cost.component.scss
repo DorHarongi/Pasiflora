@@ -1,0 +1,25 @@
+#materialsContainer {
+    display: flex;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.materials {
+    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+}
+
+.costTexts {
+    margin-right: 10px;
+}
+
+.missingMaterial{
+    color: red;
+}
+
+.enoughMaterial{
+    color: black;
+}
