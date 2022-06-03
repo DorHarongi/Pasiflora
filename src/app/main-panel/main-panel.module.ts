@@ -15,6 +15,7 @@ import { ArsenalComponent } from './buildings/arsenal/arsenal.component';
 import { QuartersComponent } from './buildings/quarters/quarters.component';
 import { WallComponent } from './buildings/wall/wall.component';
 import { EmbassyComponent } from './buildings/embassy/embassy.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -37,7 +38,8 @@ import { EmbassyComponent } from './buildings/embassy/embassy.component';
     EmbassyComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports:[
     MainPanelComponent

@@ -1,3 +1,65 @@
 .center{
     align-self: center;
 }
+#troopsTraining{
+    margin-top: 50px;
+}
+.troopsImages{
+    width: 25px;
+    height: 25px;
+    display: block;
+    margin: 0 auto;
+}
+.disabledTroopsImages{
+    opacity: 0.5;
+
+}
+input:disabled{
+    cursor: not-allowed;
+}
+.troopsInput{
+    width: 90px;
+    padding: 2px 3px 2px 0px;
+    border: 1px solid #7d5210;
+    text-align: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#materialsContainer {
+    display: flex;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.materials {
+    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+}
+
+.costTexts {
+    margin-right: 10px;
+}
+
+.missingMaterial{
+    color: red;
+}
+
+.enoughMaterial{
+    color: black;
+}
+
+.attackDefenceIcons{
+    width: 25px;
+    height: 25px;
+}
+
+.attackDefence{
+  display: flex;  
+  justify-content: center;
+}

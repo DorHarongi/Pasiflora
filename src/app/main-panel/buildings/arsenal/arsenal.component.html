@@ -3,5 +3,133 @@
         <div *ngIf = "nextLevelUnlock">
             <h5> Next level unlocks: {{nextLevelUnlock}} </h5>
         </div>
+        <table id="troopsTraining">
+            <tr>
+                <th>
+                    <img class = "troopsImages" [class.disabledTroopsImages] = "!canTrainSpearFighters" src="../../../../assets//spear.png">
+                </th>
+                <th>
+                    <img class = "troopsImages" [class.disabledTroopsImages] = "!canTrainSwordFighters" src="../../../../assets//sword.png">
+                </th>
+                <th>
+                    <img class = "troopsImages" [class.disabledTroopsImages] = "!canTrainAxeFighters" src="../../../../assets//axe.png">
+                </th>
+                <th>
+                    <img class = "troopsImages" [class.disabledTroopsImages] = "!canTrainArchers" src="../../../../assets//bow.png">
+                </th>
+                <th>
+                    <img class = "troopsImages" [class.disabledTroopsImages] = "!canTrainMagicians" src="../../../../assets//hat.png">
+                </th>
+                <th>
+                    <img class = "troopsImages" [class.disabledTroopsImages] = "!canTrainHorsemen" src="../../../../assets//horse.png">
+                </th>
+                <th>
+                    <img class = "troopsImages" [class.disabledTroopsImages] = "!canTrainCatapults" src="../../../../assets//trebuchet.png">
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input [disabled]="!canTrainSpearFighters" class = "troopsInput" type="number" name="spearFighters"  [(ngModel)]="spearFighters" (input)="troopAmountChange($event)">
+                </td>
+                <td>
+                    <input [disabled]="!canTrainSwordFighters" class = "troopsInput" type="number" name="swordFighters" [(ngModel)]="swordFighters" (input)="troopAmountChange($event)">
+                </td>
+                <td>
+                    <input [disabled]="!canTrainAxeFighters" class = "troopsInput" type="number" name="axeFighters" [(ngModel)]="axeFighters" (input)="troopAmountChange($event)">
+                </td>
+                <td>
+                    <input [disabled]="!canTrainArchers" class = "troopsInput" type="number" name="archers" [(ngModel)]="archers" (input)="troopAmountChange($event)">
+                </td>
+                <td>
+                    <input [disabled]="!canTrainMagicians" class = "troopsInput" type="number" name="magicians" [(ngModel)]="magicians" (input)="troopAmountChange($event)">
+                </td>
+                <td>
+                    <input [disabled]="!canTrainHorsemen" class = "troopsInput" type="number" name="horsemen" [(ngModel)]="horsemen" (input)="troopAmountChange($event)">
+                </td>
+                <td>
+                    <input [disabled]="!canTrainCatapults" class = "troopsInput" type="number" name="catapults" [(ngModel)]="catapults" (input)="troopAmountChange($event)">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/battle.png">
+                        {{spearFighterAttackingStat}}
+                    </div>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/shield.png">
+                        {{spearFighterDefenceStat}}
+                    </div>
+                </td>
+                <td>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/battle.png">
+                        {{swordFighterAttackingStat}}
+                    </div>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/shield.png">
+                        {{swordFighterDefenceStat}}
+                    </div>
+                </td>
+                <td>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/battle.png">
+                        {{axeFighterAttackingStat}}
+                    </div>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/shield.png">
+                        {{axeFighterDefenceStat}}
+                    </div>
+                </td>
+                <td>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/battle.png">
+                        {{archerAttackingStat}}
+                    </div>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/shield.png">
+                        {{archerDefenceStat}}
+                    </div>
+                </td>
+                <td>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/battle.png">
+                        {{magicianAttackingStat}}
+                    </div>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/shield.png">
+                        {{magicianDefenceStat}}
+                    </div>
+                </td>
+                <td>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/battle.png">
+                        {{horsemenAttackingStat}}
+                    </div>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/shield.png">
+                        {{horsemenDefenceStat}}
+                    </div>
+                </td>
+                <td>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/battle.png">
+                        {{catapultsAttackingStat}}
+                    </div>
+                    <div class="attackDefence">
+                        <img class="attackDefenceIcons" src="../../../../assets/shield.png">
+                        {{catapultsDefenceStat}}
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div id="materialsContainer" class="center">
+            <img class="materials" src="../../../assets/crop.jpg">
+            <h5 class = "costTexts" [ngClass] = "checkIfEnoughCropToTrain() ? 'enoughMaterial' : 'missingMaterial'"> {{totalMaterialsCost.crop}}</h5>
+            <img class="materials" src="../../../assets/wood.jpg">
+            <h5 class = "costTexts" [ngClass] = "checkIfEnoughWoodToTrain() ? 'enoughMaterial' : 'missingMaterial'"> {{totalMaterialsCost.wood}}</h5>
+            <img class="materials" src="../../../assets/rock.jpg">
+            <h5 class = "costTexts" [ngClass] = "checkIfEnoughStonesToTrain() ? 'enoughMaterial' : 'missingMaterial'"> {{totalMaterialsCost.stones}} </h5>
+        </div>
     </div>
 </app-building>
