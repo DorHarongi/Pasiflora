@@ -2,48 +2,6 @@
     align-self: center;
     text-align: center;
 }
-#troopsTraining{
-    margin-top: 25px;
-}
-.troopsImages{
-    width: 25px;
-    height: 25px;
-    display: block;
-    margin: 0 auto;
-}
-.disabledTroopsImages{
-    opacity: 0.5;
-
-}
-input:disabled{
-    cursor: not-allowed;
-}
-.troopsInput{
-    width: 90px;
-    padding: 2px 3px 2px 0px;
-    border: 1px solid #7d5210;
-    text-align: center;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.attackDefenceIcons{
-    width: 25px;
-    height: 25px;
-}
-
-.attack{
-    margin-bottom:10px;
-    margin-top: 10px;
-}
-
-.attackDefence{
-  display: flex;  
-  justify-content: center;
-}
 
 .buttons {
     background-image: url(../../../../assets/top-bg.png);

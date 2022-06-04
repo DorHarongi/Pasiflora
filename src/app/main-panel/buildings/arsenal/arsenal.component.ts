@@ -1,11 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { arsenalUpgradeMaterialCostByLevels, troopUnlockByLevel, spearFighterMinimumArsenalLevel, swordFighterMinimumArsenalLevel, axeFighterMinimumArsenalLevel,
-         archerMinimumArsenalLevel, magicianMinimumArsenalLevel, horsemenMinimumArsenalLevel, catapultsMinimumArsenalLevel, MaterialsCost,
-         swordFighterMaterialsCost, spearFighterMaterialsCost, axeFighterMaterialsCost, archerMaterialsCost, magicianMaterialsCost, horsemenMaterialsCost, catapultsMaterialsCost,
-         spearFighterAttackingStat, spearFighterDefenceStat, swordFighterAttackingStat, swordFighterDefenceStat, axeFighterAttackingStat, axeFighterDefenceStat,
-         archerAttackingStat, archerDefenceStat, magicianAttackingStat, magicianDefenceStat, horsemenAttackingStat, horsemenDefenceStat, catapultsAttackingStat, 
-         catapultsDefenceStat,
-         quartersPopulationByLevel } from 'utils'
+import { arsenalUpgradeMaterialCostByLevels, troopUnlockByLevel, MaterialsCost,
+         swordFighterMaterialsCost, spearFighterMaterialsCost, axeFighterMaterialsCost, archerMaterialsCost, magicianMaterialsCost, horsemenMaterialsCost, catapultsMaterialsCost}
+        from 'utils'
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../classes/Building';
 import { TroopsAmounts } from '../../models/troopsAmounts';
@@ -24,34 +20,8 @@ export class ArsenalComponent implements OnInit {
 
   buildingInformation: Building;
   nextLevelUnlock: string;
-
-  troops: TroopsAmounts = new TroopsAmounts(0, 0, 0, 0, 0, 0, 0);
-
-  canTrainSpearFighters: boolean;
-  canTrainSwordFighters: boolean;
-  canTrainAxeFighters: boolean;
-  canTrainArchers: boolean;
-  canTrainMagicians: boolean;
-  canTrainHorsemen: boolean;
-  canTrainCatapults: boolean;
-
   totalMaterialsCost: MaterialsCost = {wood: 0, stones: 0, crop: 0};
-
-  spearFighterAttackingStat: number = spearFighterAttackingStat;
-  spearFighterDefenceStat: number = spearFighterDefenceStat;
-  swordFighterAttackingStat: number = swordFighterAttackingStat;
-  swordFighterDefenceStat: number = swordFighterDefenceStat;
-  axeFighterAttackingStat: number = axeFighterAttackingStat;
-  axeFighterDefenceStat: number = axeFighterDefenceStat;
-  archerAttackingStat: number = archerAttackingStat;
-  archerDefenceStat: number = archerDefenceStat;
-  magicianAttackingStat: number = magicianAttackingStat;
-  magicianDefenceStat: number = magicianDefenceStat;
-  horsemenAttackingStat: number = horsemenAttackingStat;
-  horsemenDefenceStat: number = horsemenDefenceStat;
-  catapultsAttackingStat: number = catapultsAttackingStat;
-  catapultsDefenceStat: number = catapultsDefenceStat;
-
+  troops: TroopsAmounts = new TroopsAmounts(0, 0, 0, 0, 0, 0, 0);
 
   constructor(private userInformationService: UserInformationService, private http:HttpClient, private router: Router, private changerDector: ChangeDetectorRef) { 
 
@@ -60,76 +30,9 @@ export class ArsenalComponent implements OnInit {
     arsenalUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.arsenalLevel + 1]);
     this.nextLevelUnlock = troopUnlockByLevel[this.userInformationService.currentVillage.buildingsLevels.arsenalLevel + 1];
 
-    this.canTrainSpearFighters = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= spearFighterMinimumArsenalLevel;
-    this.canTrainSwordFighters = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= swordFighterMinimumArsenalLevel;
-    this.canTrainAxeFighters = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= axeFighterMinimumArsenalLevel;
-    this.canTrainArchers = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= archerMinimumArsenalLevel;
-    this.canTrainMagicians = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= magicianMinimumArsenalLevel;
-    this.canTrainHorsemen = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= horsemenMinimumArsenalLevel;
-    this.canTrainCatapults = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= catapultsMinimumArsenalLevel;
   }
 
   ngOnInit(): void {
-  }
-
-  spearFightersInputChange(value: any)
-  {
-    this.troops.spearFighters = this.fixInputValue(value, this.troops.spearFighters);
-    this.changerDector.detectChanges();
-    this.updateMaterialsCost();
-  }
-
-  swordFightersInputChange(value: any)
-  {
-    this.troops.swordFighters = this.fixInputValue(value, this.troops.swordFighters);
-    this.changerDector.detectChanges();
-    this.updateMaterialsCost();
-  }
-
-  axeFightersInputChange(value: any)
-  {
-    this.troops.axeFighters = this.fixInputValue(value, this.troops.axeFighters);
-    this.changerDector.detectChanges();
-    this.updateMaterialsCost();
-  }
-
-  archersInputChange(value: any)
-  {
-    this.troops.archers = this.fixInputValue(value, this.troops.archers);
-    this.changerDector.detectChanges();
-    this.updateMaterialsCost();
-  }
-
-  magiciansInputChange(value: any)
-  {
-    this.troops.magicians = this.fixInputValue(value, this.troops.magicians);
-    this.changerDector.detectChanges();
-    this.updateMaterialsCost();
-  }
-
-  horsemenInputChange(value: any)
-  {
-    this.troops.horsemen = this.fixInputValue(value, this.troops.horsemen);
-    this.changerDector.detectChanges();
-    this.updateMaterialsCost();
-  }
-  
-  catapultsInputChange(value: any)
-  {
-    this.troops.catapults = this.fixInputValue(value, this.troops.catapults);
-    this.changerDector.detectChanges();
-    this.updateMaterialsCost();
-  }
-  
-  fixInputValue(value: number, oldValue: number): number
-  {
-    let freePoulation: number = this.checkFreePopulation() + oldValue;
-    console.log(freePoulation);
-    if(value > freePoulation)
-    {
-      return freePoulation;
-    }
-    return value;
   }
 
   updateMaterialsCost()
@@ -162,7 +65,6 @@ export class ArsenalComponent implements OnInit {
      catapultsMaterialsCost.crop * this.troops.catapults;
   }
 
-
   checkIfEnoughWoodToTrain(): boolean
   {
     return this.userInformationService.currentVillage.resourcesAmounts.woodAmount >= this.totalMaterialsCost.wood;
@@ -183,27 +85,9 @@ export class ArsenalComponent implements OnInit {
     return this.checkIfEnoughWoodToTrain() && this.checkIfEnoughCropToTrain() && this.checkIfEnoughStonesToTrain();
   }
 
-  checkFreePopulation(): number
-  {
-    let village: Village = this.userInformationService.currentVillage;
-    let maximumPopulation: number = quartersPopulationByLevel[village.buildingsLevels.quartersLevel];
-    let usedPopulation: number = this.calculateTotalTroops(village) + this.calculateTotalWorkers(village);
-    let freePopulation = maximumPopulation - usedPopulation;
-    if(freePopulation <= 0) // only needed because there is a bug with ngmodel - can be remove after fixed
-      return 0;
-    return freePopulation;
-  }
-
-  calculateTotalWorkers(village: Village)
-  {
-    return village.resourcesWorkers.cropWorkers + village.resourcesWorkers.stoneWorkers + village.resourcesWorkers.woodWorkers;
-  }
-
-  calculateTotalTroops(village: Village)
-  {
-    return village.troops.archers + village.troops.axeFighters + village.troops.catapults + village.troops.horsemen + village.troops.magicians + village.troops.spearFighters 
-    + village.troops.swordFighters + 
-    this.troops.archers + this.troops.axeFighters + this.troops.catapults + this.troops.horsemen + this.troops.magicians + this.troops.spearFighters + this.troops.swordFighters;
+  updateTroops(troopsAmounts: TroopsAmounts){
+    this.troops = troopsAmounts;
+    this.updateMaterialsCost();
   }
 
   trainTroops()

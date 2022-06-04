@@ -17,6 +17,7 @@ import { WallComponent } from './buildings/wall/wall.component';
 import { EmbassyComponent } from './buildings/embassy/embassy.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialsCostComponent } from './materials-cost/materials-cost.component';
+import { TroopsChoosingComponent } from './troops-choosing/troops-choosing.component';
 
 
 
@@ -37,7 +38,8 @@ import { MaterialsCostComponent } from './materials-cost/materials-cost.componen
     QuartersComponent,
     WallComponent,
     EmbassyComponent,
-    MaterialsCostComponent
+    MaterialsCostComponent,
+    TroopsChoosingComponent
   ],
   imports: [
     CommonModule,
