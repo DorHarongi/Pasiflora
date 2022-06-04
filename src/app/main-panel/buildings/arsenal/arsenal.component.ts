@@ -13,6 +13,7 @@ import { User } from '../../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Village } from '../../models/Village';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-arsenal',
@@ -52,7 +53,7 @@ export class ArsenalComponent implements OnInit {
   catapultsDefenceStat: number = catapultsDefenceStat;
 
 
-  constructor(private userInformationService: UserInformationService, private http:HttpClient, private router: Router, private changeDetector: ChangeDetectorRef) { 
+  constructor(private userInformationService: UserInformationService, private http:HttpClient, private router: Router, private changerDector: ChangeDetectorRef) { 
 
     this.buildingInformation = new Building("arsenal", "Arsenal", this.userInformationService.currentVillage.buildingsLevels.arsenalLevel,
     "In the arsenal you can train your army troops. Level up your arsenal to unlock new troops",
@@ -71,12 +72,68 @@ export class ArsenalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  troopAmountChange(event: any)
+  spearFightersInputChange(value: any)
   {
+    this.troops.spearFighters = this.fixInputValue(value, this.troops.spearFighters);
+    this.changerDector.detectChanges();
+    this.updateMaterialsCost();
+  }
 
-    if(!this.limitMaximumTroops(event))
-      return;
+  swordFightersInputChange(value: any)
+  {
+    this.troops.swordFighters = this.fixInputValue(value, this.troops.swordFighters);
+    this.changerDector.detectChanges();
+    this.updateMaterialsCost();
+  }
 
+  axeFightersInputChange(value: any)
+  {
+    this.troops.axeFighters = this.fixInputValue(value, this.troops.axeFighters);
+    this.changerDector.detectChanges();
+    this.updateMaterialsCost();
+  }
+
+  archersInputChange(value: any)
+  {
+    this.troops.archers = this.fixInputValue(value, this.troops.archers);
+    this.changerDector.detectChanges();
+    this.updateMaterialsCost();
+  }
+
+  magiciansInputChange(value: any)
+  {
+    this.troops.magicians = this.fixInputValue(value, this.troops.magicians);
+    this.changerDector.detectChanges();
+    this.updateMaterialsCost();
+  }
+
+  horsemenInputChange(value: any)
+  {
+    this.troops.horsemen = this.fixInputValue(value, this.troops.horsemen);
+    this.changerDector.detectChanges();
+    this.updateMaterialsCost();
+  }
+  
+  catapultsInputChange(value: any)
+  {
+    this.troops.catapults = this.fixInputValue(value, this.troops.catapults);
+    this.changerDector.detectChanges();
+    this.updateMaterialsCost();
+  }
+  
+  fixInputValue(value: number, oldValue: number): number
+  {
+    let freePoulation: number = this.checkFreePopulation() + oldValue;
+    console.log(freePoulation);
+    if(value > freePoulation)
+    {
+      return freePoulation;
+    }
+    return value;
+  }
+
+  updateMaterialsCost()
+  {
     this.totalMaterialsCost.wood =
      spearFighterMaterialsCost.wood * this.troops.spearFighters +
      swordFighterMaterialsCost.wood * this.troops.swordFighters +
@@ -105,6 +162,7 @@ export class ArsenalComponent implements OnInit {
      catapultsMaterialsCost.crop * this.troops.catapults;
   }
 
+
   checkIfEnoughWoodToTrain(): boolean
   {
     return this.userInformationService.currentVillage.resourcesAmounts.woodAmount >= this.totalMaterialsCost.wood;
@@ -125,13 +183,13 @@ export class ArsenalComponent implements OnInit {
     return this.checkIfEnoughWoodToTrain() && this.checkIfEnoughCropToTrain() && this.checkIfEnoughStonesToTrain();
   }
 
-  checkFreePopulation(currentChangedTroops: number): number
+  checkFreePopulation(): number
   {
     let village: Village = this.userInformationService.currentVillage;
     let maximumPopulation: number = quartersPopulationByLevel[village.buildingsLevels.quartersLevel];
     let usedPopulation: number = this.calculateTotalTroops(village) + this.calculateTotalWorkers(village);
-    let freePopulation = maximumPopulation - usedPopulation + currentChangedTroops;
-    if(freePopulation <= 0)
+    let freePopulation = maximumPopulation - usedPopulation;
+    if(freePopulation <= 0) // only needed because there is a bug with ngmodel - can be remove after fixed
       return 0;
     return freePopulation;
   }
@@ -147,20 +205,6 @@ export class ArsenalComponent implements OnInit {
     + village.troops.swordFighters + 
     this.troops.archers + this.troops.axeFighters + this.troops.catapults + this.troops.horsemen + this.troops.magicians + this.troops.spearFighters + this.troops.swordFighters;
   }
-
-  limitMaximumTroops(event: any): boolean
-  {
-    let freePoulation: number = this.checkFreePopulation(+event.target.value)
-    if(event.target.value > freePoulation)
-    {
-      event.target.value = freePoulation;
-      console.log(this.troops);
-      return false;
-    }
-    console.log(this.troops);
-    return true;
-  }
-
 
   trainTroops()
   {
