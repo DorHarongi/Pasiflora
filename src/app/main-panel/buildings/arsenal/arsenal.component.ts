@@ -98,17 +98,15 @@ export class ArsenalComponent implements OnInit {
     let maximumPopulation: number = quartersPopulationByLevel[village.buildingsLevels.quartersLevel];
     let usedPopulation: number = this.calculateTotalTroops(village) + this.calculateTotalWorkers(village);
     let freePopulation = maximumPopulation - usedPopulation;
-    if(freePopulation <= 0) // only needed because there is a bug with ngmodel - can be remove after fixed
-      return 0;
     return freePopulation;
   }
 
-  calculateTotalWorkers(village: Village)
+  calculateTotalWorkers(village: Village): number
   {
     return village.resourcesWorkers.cropWorkers + village.resourcesWorkers.stoneWorkers + village.resourcesWorkers.woodWorkers;
   }
 
-  calculateTotalTroops(village: Village)
+  calculateTotalTroops(village: Village): number
   {
     return village.troops.archers + village.troops.axeFighters + village.troops.catapults + village.troops.horsemen + village.troops.magicians + village.troops.spearFighters 
     + village.troops.swordFighters + 

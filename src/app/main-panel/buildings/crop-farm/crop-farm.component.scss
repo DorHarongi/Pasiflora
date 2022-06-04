@@ -1,3 +1,20 @@
 .center{
     align-self: center;
+    text-align: center;
+}
+
+.buttons {
+    background-image: url(../../../../assets/top-bg.png);
+    border: 1px black solid;
+    outline: none;
+    border-radius: 0.25rem;
+    box-shadow: 2px 2px 2px 2px;
+}
+
+#hire{
+    width: 100px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 25px;
 }

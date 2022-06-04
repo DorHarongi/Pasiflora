@@ -3,5 +3,8 @@
         <h5> Current production: {{currentProductionPerHour}} per hour</h5>
         <h5> Next level production: {{nextLevelProductionPerHour}} per hour </h5>
         <h5> Worker bonus: {{singleWorkerProductionPerHour}} per hour </h5>
+        <app-hire-workers [workers]="cropWorkers" (onWorkersChange)="updateWorkers($event)"></app-hire-workers>
+        <button id="hire" class="buttons" (click)="hireWorkers()"> Hire </button>
+
     </div>
 </app-building>
