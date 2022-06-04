@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { warehouseStorageByLevel } from 'utils';
+import { warehouseStorageByLevel, quartersPopulationByLevel } from 'utils';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { ResourcesAmounts } from '../models/resourcesAmounts';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Village } from '../models/Village';
 
 @Component({
   selector: 'app-top-toolbar',
@@ -18,18 +20,21 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
   maxStonesStorage: number;
   maxCropStorage: number;
   
+  maximumPopulation: number;
+  usedPopulation: number;
   math = Math;
 
   interval;
 
   constructor(private userInformationService: UserInformationService) { 
-    this.woodAmount = this.userInformationService.currentVillage.resourcesAmounts.woodAmount;
-    this.stonesAmount = this.userInformationService.currentVillage.resourcesAmounts.stonesAmount;
-    this.cropAmount = this.userInformationService.currentVillage.resourcesAmounts.cropAmount;
+    let village: Village = this.userInformationService.currentVillage;
+    this.woodAmount = village.resourcesAmounts.woodAmount;
+    this.stonesAmount = village.resourcesAmounts.stonesAmount;
+    this.cropAmount = village.resourcesAmounts.cropAmount;
     this.interval = setInterval(()=>{
-      this.woodAmount += this.userInformationService.currentVillage.woodProductionPerSecond;
-      this.stonesAmount += this.userInformationService.currentVillage.stoneProductionPerSecond;
-      this.cropAmount += this.userInformationService.currentVillage.cropProductionPerSecond;
+      this.woodAmount += village.woodProductionPerSecond;
+      this.stonesAmount += village.stoneProductionPerSecond;
+      this.cropAmount += village.cropProductionPerSecond;
 
       if(this.woodAmount > this.maxWoodStorage)
         this.woodAmount = this.maxWoodStorage;
@@ -42,9 +47,12 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
 
     }, 1000)
 
-    this.maxWoodStorage = warehouseStorageByLevel[this.userInformationService.currentVillage.buildingsLevels.woodWarehouseLevel];
-    this.maxStonesStorage = warehouseStorageByLevel[this.userInformationService.currentVillage.buildingsLevels.stoneWarehouseLevel];
-    this.maxCropStorage = warehouseStorageByLevel[this.userInformationService.currentVillage.buildingsLevels.cropWarehouseLevel];
+    this.maxWoodStorage = warehouseStorageByLevel[village.buildingsLevels.woodWarehouseLevel];
+    this.maxStonesStorage = warehouseStorageByLevel[village.buildingsLevels.stoneWarehouseLevel];
+    this.maxCropStorage = warehouseStorageByLevel[village.buildingsLevels.cropWarehouseLevel];
+
+    this.maximumPopulation = quartersPopulationByLevel[village.buildingsLevels.quartersLevel];
+    this.usedPopulation = this.calculateTotalTroops(village) + this.calculateTotalWorkers(village);
 
   }
   ngOnDestroy(): void {
@@ -52,6 +60,18 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+  }
+
+
+  calculateTotalWorkers(village: Village)
+  {
+    return village.resourcesWorkers.cropWorkers + village.resourcesWorkers.stoneWorkers + village.resourcesWorkers.woodWorkers;
+  }
+
+  calculateTotalTroops(village: Village)
+  {
+    return village.troops.archers + village.troops.axeFighters + village.troops.catapults + village.troops.horsemen + village.troops.magicians + village.troops.spearFighters 
+    + village.troops.swordFighters;
   }
 
 }

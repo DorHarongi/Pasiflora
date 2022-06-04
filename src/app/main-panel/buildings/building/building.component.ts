@@ -29,7 +29,7 @@ export class BuildingComponent implements OnInit {
   upgrade(): void{
     if(this.checkIfEnoughMaterialsToUpgrade())
     {
-      this.http.post<User>("http://localhost:3000/buildings-upgrading/upgradeBuilding",
+      this.http.post<User>("http://192.168.1.168:3000/buildings-upgrading/upgradeBuilding",
       {
         username: this.userInformationService.userInformation.username,
         villageIndex: this.userInformationService.currentVillageIndex,

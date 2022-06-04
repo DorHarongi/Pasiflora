@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { arsenalUpgradeMaterialCostByLevels, troopUnlockByLevel, spearFighterMinimumArsenalLevel, swordFighterMinimumArsenalLevel, axeFighterMinimumArsenalLevel,
          archerMinimumArsenalLevel, magicianMinimumArsenalLevel, horsemenMinimumArsenalLevel, catapultsMinimumArsenalLevel, MaterialsCost,
          swordFighterMaterialsCost, spearFighterMaterialsCost, axeFighterMaterialsCost, archerMaterialsCost, magicianMaterialsCost, horsemenMaterialsCost, catapultsMaterialsCost,
          spearFighterAttackingStat, spearFighterDefenceStat, swordFighterAttackingStat, swordFighterDefenceStat, axeFighterAttackingStat, axeFighterDefenceStat,
          archerAttackingStat, archerDefenceStat, magicianAttackingStat, magicianDefenceStat, horsemenAttackingStat, horsemenDefenceStat, catapultsAttackingStat, 
-         catapultsDefenceStat } from 'utils'
+         catapultsDefenceStat,
+         quartersPopulationByLevel } from 'utils'
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../classes/Building';
 import { TroopsAmounts } from '../../models/troopsAmounts';
 import { User } from '../../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Village } from '../../models/Village';
 
 @Component({
   selector: 'app-arsenal',
@@ -50,7 +52,7 @@ export class ArsenalComponent implements OnInit {
   catapultsDefenceStat: number = catapultsDefenceStat;
 
 
-  constructor(private userInformationService: UserInformationService, private http:HttpClient, private router: Router) { 
+  constructor(private userInformationService: UserInformationService, private http:HttpClient, private router: Router, private changeDetector: ChangeDetectorRef) { 
 
     this.buildingInformation = new Building("arsenal", "Arsenal", this.userInformationService.currentVillage.buildingsLevels.arsenalLevel,
     "In the arsenal you can train your army troops. Level up your arsenal to unlock new troops",
@@ -72,7 +74,7 @@ export class ArsenalComponent implements OnInit {
   troopAmountChange(event: any)
   {
 
-    if(this.limitMaximumInputLength(event))
+    if(!this.limitMaximumTroops(event))
       return;
 
     this.totalMaterialsCost.wood =
@@ -123,21 +125,48 @@ export class ArsenalComponent implements OnInit {
     return this.checkIfEnoughWoodToTrain() && this.checkIfEnoughCropToTrain() && this.checkIfEnoughStonesToTrain();
   }
 
-  limitMaximumInputLength(event: any): boolean
+  checkFreePopulation(currentChangedTroops: number): number
   {
-    if(event.target.value > 100000)
-    {
-      event.target.value = 100000;
-      return true;
-    }
-    return false;
+    let village: Village = this.userInformationService.currentVillage;
+    let maximumPopulation: number = quartersPopulationByLevel[village.buildingsLevels.quartersLevel];
+    let usedPopulation: number = this.calculateTotalTroops(village) + this.calculateTotalWorkers(village);
+    let freePopulation = maximumPopulation - usedPopulation + currentChangedTroops;
+    if(freePopulation <= 0)
+      return 0;
+    return freePopulation;
   }
+
+  calculateTotalWorkers(village: Village)
+  {
+    return village.resourcesWorkers.cropWorkers + village.resourcesWorkers.stoneWorkers + village.resourcesWorkers.woodWorkers;
+  }
+
+  calculateTotalTroops(village: Village)
+  {
+    return village.troops.archers + village.troops.axeFighters + village.troops.catapults + village.troops.horsemen + village.troops.magicians + village.troops.spearFighters 
+    + village.troops.swordFighters + 
+    this.troops.archers + this.troops.axeFighters + this.troops.catapults + this.troops.horsemen + this.troops.magicians + this.troops.spearFighters + this.troops.swordFighters;
+  }
+
+  limitMaximumTroops(event: any): boolean
+  {
+    let freePoulation: number = this.checkFreePopulation(+event.target.value)
+    if(event.target.value > freePoulation)
+    {
+      event.target.value = freePoulation;
+      console.log(this.troops);
+      return false;
+    }
+    console.log(this.troops);
+    return true;
+  }
+
 
   trainTroops()
   {
     if(this.checkIfEnoughMaterialsToTrain())
     {
-      this.http.post<User>("http://localhost:3000/troops-training",
+      this.http.post<User>("http://192.168.1.168:3000/troops-training",
       {
         username: this.userInformationService.userInformation.username,
         villageIndex: this.userInformationService.currentVillageIndex,
