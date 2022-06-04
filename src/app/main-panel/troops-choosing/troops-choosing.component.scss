@@ -39,3 +39,11 @@ input::-webkit-inner-spin-button {
   display: flex;  
   justify-content: center;
 }
+
+#max{
+    margin-top: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-position: under;
+    color: green;
+}

@@ -54,6 +54,29 @@
         </tr>
         <tr>
             <td>
+                <h5 id="max" *ngIf="maxPossibleTroops.spearFighters > 0 && canTrainSpearFighters " (click)="maxSpearFighters()"> ({{maxPossibleTroops.spearFighters}}) </h5>
+            </td>
+            <td>
+                <h5 id="max" *ngIf="maxPossibleTroops.swordFighters > 0 && canTrainSwordFighters" (click)="maxSwordFighters()"> ({{maxPossibleTroops.swordFighters}}) </h5>
+            </td>
+            <td>
+                <h5 id="max" *ngIf="maxPossibleTroops.axeFighters > 0 && canTrainAxeFighters" (click)="maxAxeFighters()"> ({{maxPossibleTroops.axeFighters}}) </h5>
+            </td>
+            <td>
+                <h5 id="max" *ngIf="maxPossibleTroops.archers > 0 && canTrainArchers" (click)="maxArchers()"> ({{maxPossibleTroops.archers}}) </h5>
+            </td>
+            <td>
+                <h5 id="max" *ngIf="maxPossibleTroops.magicians > 0 && canTrainMagicians " (click)="maxMagicians()"> ({{maxPossibleTroops.magicians}}) </h5>
+            </td>
+            <td>
+                <h5 id="max" *ngIf="maxPossibleTroops.horsemen > 0 && canTrainHorsemen" (click)="maxHorsemen()"> ({{maxPossibleTroops.horsemen}}) </h5>
+            </td>
+            <td>
+                <h5 id="max" *ngIf="maxPossibleTroops.catapults > 0 && canTrainCatapults" (click)="maxCatapults()"> ({{maxPossibleTroops.catapults}}) </h5>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <div class="attackDefence attack">
                     <img class="attackDefenceIcons" src="../../../../assets/battle.png">
                     {{spearFighterAttackingStat}}

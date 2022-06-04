@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { TroopsAmounts } from '../models/troopsAmounts';
 import { spearFighterMinimumArsenalLevel, swordFighterMinimumArsenalLevel, axeFighterMinimumArsenalLevel,
@@ -17,8 +17,9 @@ import { Village } from '../models/Village';
 export class TroopsChoosingComponent implements OnInit {
 
   @Output() onTroopsChange = new EventEmitter<TroopsAmounts>();
+  @Input() maxPossibleTroops!: TroopsAmounts;
 
-  constructor(private userInformationService: UserInformationService, private changeDetector: ChangeDetectorRef) { 
+  constructor(private userInformationService: UserInformationService) { 
     this.canTrainSpearFighters = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= spearFighterMinimumArsenalLevel;
     this.canTrainSwordFighters = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= swordFighterMinimumArsenalLevel;
     this.canTrainAxeFighters = this.userInformationService.currentVillage.buildingsLevels.arsenalLevel >= axeFighterMinimumArsenalLevel;
@@ -30,6 +31,7 @@ export class TroopsChoosingComponent implements OnInit {
   }
 
   troops: TroopsAmounts = new TroopsAmounts(0, 0, 0, 0, 0, 0, 0);
+
   spearFighterAttackingStat: number = spearFighterAttackingStat;
   spearFighterDefenceStat: number = spearFighterDefenceStat;
   swordFighterAttackingStat: number = swordFighterAttackingStat;
@@ -58,87 +60,100 @@ export class TroopsChoosingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  checkFreePopulation(): number
-  {
-    let village: Village = this.userInformationService.currentVillage;
-    let maximumPopulation: number = quartersPopulationByLevel[village.buildingsLevels.quartersLevel];
-    let usedPopulation: number = this.calculateTotalTroops(village) + this.calculateTotalWorkers(village);
-    let freePopulation = maximumPopulation - usedPopulation;
-    if(freePopulation <= 0) // only needed because there is a bug with ngmodel - can be remove after fixed
-      return 0;
-    return freePopulation;
-  }
-
-  calculateTotalWorkers(village: Village)
-  {
-    return village.resourcesWorkers.cropWorkers + village.resourcesWorkers.stoneWorkers + village.resourcesWorkers.woodWorkers;
-  }
-
-  calculateTotalTroops(village: Village)
-  {
-    return village.troops.archers + village.troops.axeFighters + village.troops.catapults + village.troops.horsemen + village.troops.magicians + village.troops.spearFighters 
-    + village.troops.swordFighters + 
-    this.troops.archers + this.troops.axeFighters + this.troops.catapults + this.troops.horsemen + this.troops.magicians + this.troops.spearFighters + this.troops.swordFighters;
-  }
-
   spearFightersInputChange(value: any)
   {
-    this.troops.spearFighters = this.fixInputValue(value, this.troops.spearFighters);
-    this.changeDetector.detectChanges();
+    this.troops.spearFighters = this.fixInputValue(value, this.troops.spearFighters, this.maxPossibleTroops.spearFighters);
     this.onTroopsChange.emit(this.troops);
   }
 
   swordFightersInputChange(value: any)
   {
-    this.troops.swordFighters = this.fixInputValue(value, this.troops.swordFighters);
-    this.changeDetector.detectChanges();
+    this.troops.swordFighters = this.fixInputValue(value, this.troops.swordFighters, this.maxPossibleTroops.swordFighters);
     this.onTroopsChange.emit(this.troops);
   }
 
   axeFightersInputChange(value: any)
   {
-    this.troops.axeFighters = this.fixInputValue(value, this.troops.axeFighters);
-    this.changeDetector.detectChanges();
+    this.troops.axeFighters = this.fixInputValue(value, this.troops.axeFighters, this.maxPossibleTroops.axeFighters);
     this.onTroopsChange.emit(this.troops);
   }
 
   archersInputChange(value: any)
   {
-    this.troops.archers = this.fixInputValue(value, this.troops.archers);
-    this.changeDetector.detectChanges();
+    this.troops.archers = this.fixInputValue(value, this.troops.archers, this.maxPossibleTroops.archers);
     this.onTroopsChange.emit(this.troops);
   }
 
   magiciansInputChange(value: any)
   {
-    this.troops.magicians = this.fixInputValue(value, this.troops.magicians);
-    this.changeDetector.detectChanges();
+    this.troops.magicians = this.fixInputValue(value, this.troops.magicians, this.maxPossibleTroops.archers);
     this.onTroopsChange.emit(this.troops);
   }
 
   horsemenInputChange(value: any)
   {
-    this.troops.horsemen = this.fixInputValue(value, this.troops.horsemen);
-    this.changeDetector.detectChanges();
+    this.troops.horsemen = this.fixInputValue(value, this.troops.horsemen, this.maxPossibleTroops.horsemen);
     this.onTroopsChange.emit(this.troops);
   }
   
   catapultsInputChange(value: any)
   {
-    this.troops.catapults = this.fixInputValue(value, this.troops.catapults);
-    this.changeDetector.detectChanges();
+    this.troops.catapults = this.fixInputValue(value, this.troops.catapults, this.maxPossibleTroops.catapults);
     this.onTroopsChange.emit(this.troops);
   }
   
-  fixInputValue(value: number, oldValue: number): number
+  fixInputValue(value: number, oldValue: number, maxValue: number): number
   {
-    let freePoulation: number = this.checkFreePopulation() + oldValue;
-    console.log(freePoulation);
+    let freePoulation: number = maxValue + oldValue;
     if(value > freePoulation)
     {
-      return freePoulation;
+      return 0;
     }
     return value;
   }
+
+  maxSpearFighters()
+  {
+    this.troops.spearFighters += this.maxPossibleTroops.spearFighters;
+    this.onTroopsChange.emit(this.troops);
+  }
+
+  maxSwordFighters()
+  {
+    this.troops.swordFighters += this.maxPossibleTroops.swordFighters;
+    this.onTroopsChange.emit(this.troops);
+  }
+
+  maxAxeFighters()
+  {
+    this.troops.axeFighters += this.maxPossibleTroops.axeFighters;
+    this.onTroopsChange.emit(this.troops);
+  }
+
+  maxArchers()
+  {
+    this.troops.archers += this.maxPossibleTroops.archers;
+    this.onTroopsChange.emit(this.troops);
+  }
+
+  maxMagicians()
+  {
+    this.troops.magicians += this.maxPossibleTroops.magicians;
+    this.onTroopsChange.emit(this.troops);
+  }
+
+  maxHorsemen()
+  {
+    this.troops.horsemen += this.maxPossibleTroops.horsemen;
+    this.onTroopsChange.emit(this.troops);
+  }
+
+  maxCatapults()
+  {
+    this.troops.catapults += this.maxPossibleTroops.catapults
+    this.onTroopsChange.emit(this.troops);
+  }
+
+  
 
 }
