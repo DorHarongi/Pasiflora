@@ -4,8 +4,10 @@
     <h2 id = "titleText" class="center">{{building.title}} (Level {{building.level}})</h2>
     <h5 class="center"> {{building.description}} </h5>
     <ng-content select="[extraInformation]"></ng-content>
-    <h5 id = "requirementsText" class="center"> Level up Requirements: </h5>
-    <app-materials-cost [materialsCost]="building.levelUpMaterialCost"></app-materials-cost>
-    <button id = "upgrade" class ="buttons center" (click)="upgrade()" [disabled]="checkIfEnoughMaterialsToUpgrade() == false"> Upgrade </button>
+    <div *ngIf = "building.levelUpMaterialCost != undefined">
+        <h5 id = "requirementsText" class="center"> Level up Requirements: </h5>
+        <app-materials-cost [materialsCost]="building.levelUpMaterialCost"></app-materials-cost>
+        <button id = "upgrade" class ="buttons center" (click)="upgrade()" [disabled]="checkIfEnoughMaterialsToUpgrade() == false"> Upgrade </button>
+    </div>
     <button id = "back" class="buttons center" (click)="goBack()"> Back </button>
 </div>
