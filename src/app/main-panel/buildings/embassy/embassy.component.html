@@ -5,7 +5,9 @@
         </div>
         <div *ngIf = "buildingInformation.level >= embassyMinimumLevelForClanJoin">
             <h5> Current maximum support troops: {{currentMaximumDefenceTroops}}</h5>
-            <h5> Next level maximum support troops : {{nextLevelMaximumDefenceTroops}}</h5>
+            <div *ngIf="nextLevelMaximumDefenceTroops">
+                <h5> Next level maximum support troops : {{nextLevelMaximumDefenceTroops}}</h5>
+            </div>
         </div>
     </div>
 </app-building>
