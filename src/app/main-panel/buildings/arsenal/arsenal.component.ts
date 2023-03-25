@@ -145,7 +145,7 @@ export class ArsenalComponent implements OnInit {
   {
     if(this.checkIfEnoughMaterialsToTrain())
     {
-      this.http.post<User>("http://192.168.1.168:3000/troops-training",
+      this.http.post<User>("http://localhost:3000/troops-training",
       {
         username: this.userInformationService.userInformation.username,
         villageIndex: this.userInformationService.currentVillageIndex,

@@ -17,7 +17,7 @@ export class LoginService {
 
   login(username: string, password: string): Observable<User>
    {
-     let observable: Observable<User> = this.http.post<User>("http://192.168.1.168:3000/users/login", {
+     let observable: Observable<User> = this.http.post<User>("http://localhost:3000/users/login", {
        username: username,
        password: password
      })

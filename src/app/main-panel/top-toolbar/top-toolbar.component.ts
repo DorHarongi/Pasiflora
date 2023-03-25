@@ -4,6 +4,7 @@ import { UserInformationService } from 'src/app/user-information/user-informatio
 import { ResourcesAmounts } from '../models/resourcesAmounts';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Village } from '../models/Village';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-toolbar',
@@ -26,7 +27,7 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
 
   interval;
 
-  constructor(private userInformationService: UserInformationService) { 
+  constructor(private userInformationService: UserInformationService, private router: Router) { 
     let village: Village = this.userInformationService.currentVillage;
     this.woodAmount = village.resourcesAmounts.woodAmount;
     this.stonesAmount = village.resourcesAmounts.stonesAmount;
@@ -72,6 +73,16 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
   {
     return village.troops.archers + village.troops.axeFighters + village.troops.catapults + village.troops.horsemen + village.troops.magicians + village.troops.spearFighters 
     + village.troops.swordFighters;
+  }
+
+  goToStatistics()
+  {
+    this.router.navigate(['Statistics']);
+  }
+
+  goToMessages()
+  {
+    this.router.navigate(['Messages']);
   }
 
 }

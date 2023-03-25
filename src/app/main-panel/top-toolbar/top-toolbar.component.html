@@ -1,12 +1,16 @@
 <div id="toolbar">
-    <div id="container">
-        <img class="materials" src="../../../assets/population.png">
+    <div class="left-side flex-container">
+        <img class="icons clickable" src="../../../assets/pie-chart.png" (click)="goToStatistics()">
+        <img class="icons clickable" src="../../../assets/ancient-scroll.png" (click)="goToMessages()">
+    </div>
+    <div class="right-side flex-container">
+        <img class="icons" src="../../../assets/population.png">
         <h5> {{usedPopulation}} / {{maximumPopulation}}</h5>
-        <img class="materials" src="../../../assets/crop.jpg">
+        <img class="icons" src="../../../assets/crop.jpg">
         <h5> {{math.floor(cropAmount)}} / {{maxCropStorage}}</h5>
-        <img class="materials" src="../../../assets/wood.jpg">
+        <img class="icons" src="../../../assets/wood.jpg">
         <h5> {{math.floor(woodAmount)}} / {{maxWoodStorage}}</h5>
-        <img class="materials" src="../../../assets/rock.jpg">
+        <img class="icons" src="../../../assets/rock.jpg">
         <h5> {{math.floor(stonesAmount)}} / {{maxStonesStorage}}</h5>
     </div>
 </div>

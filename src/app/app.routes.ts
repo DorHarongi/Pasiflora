@@ -15,6 +15,7 @@ import { WoodFactoryComponent } from './main-panel/buildings/wood-factory/wood-f
 import { WoodWarehouseComponent } from './main-panel/buildings/wood-warehouse/wood-warehouse.component';
  
 import { MainPanelComponent} from './main-panel/main-panel/main-panel.component';
+import { StatisticsComponent } from './statistics/statistics/statistics.component';
  
  
 export const appRoutes: Routes = [
@@ -31,5 +32,6 @@ export const appRoutes: Routes = [
   { path: 'Quarters', component: QuartersComponent, canActivate : [AuthGuardService] },
   { path: 'Wall', component: WallComponent, canActivate : [AuthGuardService] },
   { path: 'Embassy', component: EmbassyComponent, canActivate : [AuthGuardService] },
+  { path: 'Statistics', component: StatisticsComponent, canActivate : [AuthGuardService] },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

@@ -45,7 +45,7 @@ export class StoneMineComponent implements OnInit {
   {
     let village = this.userInformationService.currentVillage;
     let resourcesWorkers: ResourcesWorkers = new ResourcesWorkers(0,this.stoneWorkers - village.resourcesWorkers.stoneWorkers, 0);
-    this.http.post<User>("http://192.168.1.168:3000/workers",
+    this.http.post<User>("http://localhost:3000/workers",
     {
       username: this.userInformationService.userInformation.username,
       villageIndex: this.userInformationService.currentVillageIndex,

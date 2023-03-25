@@ -48,7 +48,8 @@ import { HireWorkersComponent } from './hire-workers/hire-workers.component';
     FormsModule
   ],
   exports:[
-    MainPanelComponent
+    MainPanelComponent,
+    TopToolbarComponent
   ]
 })
 export class MainPanelModule { }
