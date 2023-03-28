@@ -13,7 +13,7 @@ export class CenterBuildingComponent implements OnInit {
   buildingInformation: Building;
   constructor(private userInformationService: UserInformationService) { 
     this.buildingInformation = new Building("centerBuilding", "Center Building", this.userInformationService.currentVillage.buildingsLevels.centerBuildingLevel, 
-    "The main building of your village. Level it up to a certain level will make you be able to level up all other buildings to this level. As soon as your main building reaches level 10, You can create another village.",
+    "The main building of your village. Level it up to a certain level will make you be able to level up all other buildings to this level. Once your main building reaches level 10, You can create another village.",
     centerBuildingUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.centerBuildingLevel + 1]);
   }
 

@@ -17,7 +17,7 @@ export class EmbassyComponent implements OnInit {
 
   constructor(private userInformationService: UserInformationService) { 
     this.buildingInformation = new Building("embassy", "Embassy", this.userInformationService.currentVillage.buildingsLevels.embassyLevel, 
-    "The embassy is where support troops of your clan live. The higher level your embassy is, the more troops it can store",
+    "The embassy is where support troops of your clan live. The higher level your embassy is, the more troops it can store.",
     embassyUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.embassyLevel + 1]);
 
     this.currentMaximumDefenceTroops = embassyMaximumDefenseTroopsByLevels[this.userInformationService.currentVillage.buildingsLevels.embassyLevel];

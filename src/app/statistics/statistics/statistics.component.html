@@ -1,1 +1,43 @@
 <app-top-toolbar></app-top-toolbar>
+<div id = "container">
+    <h2 id = "titleText" class="center margin-top">Statistics</h2>
+    <table id="table" class="center bordered margin-top">
+        <th class="center">
+            Rank 
+         </th>
+        <th class="center">
+           Name 
+        </th>
+        <th class="center">
+            Clan
+        </th>
+        <th class="center">
+            Population
+        </th>
+        <th class="center">
+            Villages
+        </th>
+
+        <tr *ngFor="let user of usersInPage; let i = index" class="center bordered">
+            <td> {{page * 10 + i + 1}}</td>
+            <td> {{user.username}} </td>
+            <td *ngIf = "user.clanName != ''"> {{user.clanName}} </td>
+            <td *ngIf = "user.clanName == ''"> No clan </td>
+            <td> {{user.population}} </td>
+            <td> {{user.numberOfVillages}} </td>
+        </tr>
+    </table>
+
+    <div class="pagination center margin-top">
+        <p (click)="moveToPage(0)">&laquo;</p>
+        <p (click)="moveToPage(0)" [class.active] = 'page == 0'>1</p>
+        <p (click)="moveToPage(1)" [class.active] = 'page == 1'>2</p>
+        <p (click)="moveToPage(2)" [class.active] = 'page == 2'>3</p>
+        <p (click)="moveToPage(3)" [class.active] = 'page == 3'>4</p>
+        <p (click)="moveToPage(4)" [class.active] = 'page == 4'>5</p>
+        <p (click)="moveToPage(5)" [class.active] = 'page == 5'>6</p>
+        <p href="#">&raquo;</p>
+      </div>
+    
+    <button id = "back" class="buttons center" (click)="goBack()"> Back </button>
+</div>

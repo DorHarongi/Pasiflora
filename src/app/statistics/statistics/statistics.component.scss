@@ -1,0 +1,67 @@
+.buttons {
+    background-image: url(../../../assets/top-bg.png);
+    border: 1px black solid;
+    outline: none;
+    border-radius: 0.25rem;
+    box-shadow: 2px 2px 2px 2px;
+}
+
+#back {
+    width: 100px;
+    margin-top: 50px;
+    height: 50px;
+}
+
+.center{
+    align-self: center;
+    text-align: center; 
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background-image: url("../../../assets//right-bg.jpg");
+    width: 100%;
+    overflow-y: scroll;
+    margin-top: 7.5vh;
+    height: 92.5%;
+    position: absolute;
+
+}
+
+.bordered{
+    border: 1px black solid;
+}
+
+#table{
+    width: 35%;
+}
+
+.margin-top{
+  margin-top: 2%
+}
+
+.pagination {
+    display: inline-block;
+    margin-top: 2%
+  }
+  
+  .pagination p {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .pagination p.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .pagination p:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+  }
