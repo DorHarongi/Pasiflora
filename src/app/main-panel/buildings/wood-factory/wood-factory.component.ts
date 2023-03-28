@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { woodFactoryUpgradeMaterialCostByLevels, factoriesProductionSpeedByLevel, singleWorkerProductionSpeedPerSecond } from 'utils';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../classes/Building';
@@ -6,19 +6,21 @@ import { ResourcesWorkers } from '../../models/resourcesWorkers';
 import { User } from '../../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-wood-factory',
   templateUrl: './wood-factory.component.html',
   styleUrls: ['./wood-factory.component.scss']
 })
-export class WoodFactoryComponent implements OnInit {
+export class WoodFactoryComponent implements OnInit, OnDestroy {
 
   buildingInformation: Building;
   currentProductionPerHour: number;
   nextLevelProductionPerHour: number;
   singleWorkerProductionPerHour: number;
   woodWorkers: number;
+  subscription!: Subscription;
 
   constructor(private userInformationService: UserInformationService, private http: HttpClient, private router: Router) {
      
@@ -31,6 +33,10 @@ export class WoodFactoryComponent implements OnInit {
     this.singleWorkerProductionPerHour = singleWorkerProductionSpeedPerSecond * 3600;
 
     this.woodWorkers = this.userInformationService.currentVillage.resourcesWorkers.woodWorkers;
+  }
+  ngOnDestroy(): void {
+    if(this.subscription)
+      this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -45,15 +51,15 @@ export class WoodFactoryComponent implements OnInit {
   {
     let village = this.userInformationService.currentVillage;
     let resourcesWorkers: ResourcesWorkers = new ResourcesWorkers(this.woodWorkers - village.resourcesWorkers.woodWorkers, 0, 0);
-    this.http.post<User>("http://localhost:3000/workers",
+    let observable: Observable<User>  = this.http.post<User>("http://localhost:3000/workers",
     {
       username: this.userInformationService.userInformation.username,
       villageIndex: this.userInformationService.currentVillageIndex,
       resourcesWorkers: resourcesWorkers
-    }).subscribe((user: User)=>{
+    });
+    this.subscription = observable.subscribe((user: User)=>{
       this.userInformationService.setUserInformation(user);
       this.router.navigateByUrl('home');
-    })
+    });
   }
-
 }

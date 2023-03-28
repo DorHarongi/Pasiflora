@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { arsenalUpgradeMaterialCostByLevels, troopUnlockByLevel, MaterialsCost, quartersPopulationByLevel,
          swordFighterMaterialsCost, spearFighterMaterialsCost, axeFighterMaterialsCost, archerMaterialsCost, magicianMaterialsCost, horsemenMaterialsCost, catapultsMaterialsCost}
         from 'utils'
@@ -10,19 +10,21 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Village } from '../../models/Village';
 import { ResourcesAmounts } from '../../models/resourcesAmounts';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-arsenal',
   templateUrl: './arsenal.component.html',
   styleUrls: ['./arsenal.component.scss']
 })
-export class ArsenalComponent implements OnInit {
+export class ArsenalComponent implements OnInit, OnDestroy {
 
   buildingInformation: Building;
   nextLevelUnlock: string;
   totalMaterialsCost: MaterialsCost = {wood: 0, stones: 0, crop: 0};
   troops: TroopsAmounts = new TroopsAmounts(0, 0, 0, 0, 0, 0, 0);
   maxPossibleTroops: TroopsAmounts;
+  subscription!: Subscription;
 
   constructor(private userInformationService: UserInformationService, private http:HttpClient, private router: Router, private changerDector: ChangeDetectorRef) { 
 
@@ -31,6 +33,11 @@ export class ArsenalComponent implements OnInit {
     arsenalUpgradeMaterialCostByLevels[this.userInformationService.currentVillage.buildingsLevels.arsenalLevel + 1]);
     this.nextLevelUnlock = troopUnlockByLevel[this.userInformationService.currentVillage.buildingsLevels.arsenalLevel + 1];
     this.maxPossibleTroops = this.calculateMaxTroopsAmounts();
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription)
+      this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -145,12 +152,13 @@ export class ArsenalComponent implements OnInit {
   {
     if(this.checkIfEnoughMaterialsToTrain())
     {
-      this.http.post<User>("http://localhost:3000/troops-training",
+      let observable: Observable<User> = this.http.post<User>("http://localhost:3000/troops-training",
       {
         username: this.userInformationService.userInformation.username,
         villageIndex: this.userInformationService.currentVillageIndex,
         troopsAmount: this.troops
-      }).subscribe((user: User)=>{
+      });
+      this.subscription = observable.subscribe((user: User)=>{
         this.userInformationService.setUserInformation(user);
         this.router.navigateByUrl('home');
       })

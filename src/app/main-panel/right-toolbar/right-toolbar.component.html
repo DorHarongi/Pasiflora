@@ -11,6 +11,14 @@
             <h5> Stone: {{stoneProduction.toFixed(0)}} per hour </h5>
         </div>
     </div>
+    <div class="subContainer" id="villages">
+        <h4> Villages </h4>
+        <ul>
+            <li *ngFor = "let village of villages; let i = index" (click)="switchToVillage(i)" [class.active-li]="i == activeVillage">
+                 {{village}} 
+            </li>
+        </ul>
+    </div>
     <div class="subContainer" id=troops>
         <h4> Troops </h4>
         <div class="troops-container flex-container"> <img class="material" src="../../../assets/spear.png">

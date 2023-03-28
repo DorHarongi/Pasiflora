@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../login.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
   })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
     loginForm!: FormGroup;
     loading = false;
     submitted = false;
     returnUrl!: string;
+    subscription!: Subscription;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -24,6 +26,11 @@ export class LoginComponent implements OnInit {
         if (this.loginService.isUserLoggedIn()) {
             this.router.navigate(['home']);
         }
+    }
+    
+    ngOnDestroy(): void {
+        if(this.subscription)
+            this.subscription.unsubscribe();
     }
 
     ngOnInit() {
@@ -47,7 +54,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        await this.loginService.login(this.form['username'].value, this.form['password'].value).subscribe(()=>{
+        this.subscription = await this.loginService.login(this.form['username'].value, this.form['password'].value).subscribe(()=>{
           this.router.navigate(['home']);
         },()=>{
           this.loading = false;

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../classes/Building';
 import { User } from '../../models/User';
@@ -10,12 +11,18 @@ import { User } from '../../models/User';
   templateUrl: './building.component.html',
   styleUrls: ['./building.component.scss'],
 })
-export class BuildingComponent implements OnInit {
+export class BuildingComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private userInformationService: UserInformationService, private http:HttpClient) { }
 
+  ngOnDestroy(): void {
+    if(this.subscription)
+      this.subscription.unsubscribe();
+  }
+
   @Input()
   building!: Building;
+  subscription!: Subscription;
   
 
   ngOnInit(): void {
@@ -29,12 +36,13 @@ export class BuildingComponent implements OnInit {
   upgrade(): void{
     if(this.checkIfEnoughMaterialsToUpgrade())
     {
-      this.http.post<User>("http://localhost:3000/buildings-upgrading/upgradeBuilding",
+      let observable: Observable<User> = this.http.post<User>("http://localhost:3000/buildings-upgrading/upgradeBuilding",
       {
         username: this.userInformationService.userInformation.username,
         villageIndex: this.userInformationService.currentVillageIndex,
         buildingName: this.building.name
-      }).subscribe((user: User)=>{
+      });
+      this.subscription = observable.subscribe((user: User)=>{
         this.userInformationService.setUserInformation(user);
         this.router.navigateByUrl('home');
       })

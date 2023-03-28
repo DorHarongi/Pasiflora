@@ -3,6 +3,10 @@
     height: 100%;
     border-left: 2px black solid;
     position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-around;
 }
 
 .subContainer {
@@ -14,12 +18,21 @@
     box-shadow: 2px 2px 2px 2px;
 }
 
+#villages{
+    height: 250px;
+    overflow-y: auto;
+}
+
 #troops {
     height: 450px;
 }
 
 #production {
     height: 250px;
+}
+
+h5{
+    text-align: center;
 }
 
 h4 {
@@ -48,4 +61,12 @@ h4 {
     width: 25px;
     height: 25px;
     margin-right: 7px;
+}
+
+li{
+    cursor: pointer;
+}
+
+.active-li{
+    text-decoration: underline;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { stoneMineUpgradeMaterialCostByLevels, factoriesProductionSpeedByLevel, singleWorkerProductionSpeedPerSecond} from 'utils';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Building } from '../../classes/Building';
@@ -6,19 +6,21 @@ import { ResourcesWorkers } from '../../models/resourcesWorkers';
 import { User } from '../../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stone-mine',
   templateUrl: './stone-mine.component.html',
   styleUrls: ['./stone-mine.component.scss']
 })
-export class StoneMineComponent implements OnInit {
+export class StoneMineComponent implements OnInit, OnDestroy {
 
   buildingInformation: Building;
   currentProductionPerHour: number;
   nextLevelProductionPerHour: number;
   singleWorkerProductionPerHour: number;
   stoneWorkers: number;
+  subscription!: Subscription;
 
   constructor(private userInformationService: UserInformationService, private http: HttpClient, private router: Router) {
     
@@ -33,6 +35,11 @@ export class StoneMineComponent implements OnInit {
     this.stoneWorkers = this.userInformationService.currentVillage.resourcesWorkers.stoneWorkers;
   }
 
+  ngOnDestroy(): void {
+    if(this.subscription)
+      this.subscription.unsubscribe();
+  }
+
   ngOnInit(): void {
   }
 
@@ -45,12 +52,13 @@ export class StoneMineComponent implements OnInit {
   {
     let village = this.userInformationService.currentVillage;
     let resourcesWorkers: ResourcesWorkers = new ResourcesWorkers(0,this.stoneWorkers - village.resourcesWorkers.stoneWorkers, 0);
-    this.http.post<User>("http://localhost:3000/workers",
+    let observable: Observable<User> = this.http.post<User>("http://localhost:3000/workers",
     {
       username: this.userInformationService.userInformation.username,
       villageIndex: this.userInformationService.currentVillageIndex,
       resourcesWorkers: resourcesWorkers
-    }).subscribe((user: User)=>{
+    });
+    this.subscription = observable.subscribe((user: User)=>{
       this.userInformationService.setUserInformation(user);
       this.router.navigateByUrl('home');
     })

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { BuildingTypes } from '../models/BuildingTypes';
 import { Village } from '../models/Village';
@@ -9,15 +10,24 @@ import { Village } from '../models/Village';
   templateUrl: './main-panel.component.html',
   styleUrls: ['./main-panel.component.scss']
 })
-export class MainPanelComponent implements OnInit {
+export class MainPanelComponent implements OnInit, OnDestroy {
 
   hoveredBuildingIndex: number = -1;
   village!: Village;
+  subscription!: Subscription;
   constructor(private userInformationService: UserInformationService, private router: Router) { }
+
+  ngOnDestroy(): void {
+    if(this.subscription)
+      this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void
   {
     this.village = this.userInformationService.currentVillage;
+    this.subscription = this.userInformationService.villageChanged$.subscribe(()=>{
+      this.village = this.userInformationService.currentVillage;
+    })
   }
 
   handleClickedBuilding(index: number)

@@ -5,6 +5,7 @@ import { ResourcesAmounts } from '../models/resourcesAmounts';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Village } from '../models/Village';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-top-toolbar',
@@ -17,17 +18,58 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
   stonesAmount!: number;
   cropAmount!: number;
 
-  maxWoodStorage: number;
-  maxStonesStorage: number;
-  maxCropStorage: number;
+  maxWoodStorage: number = 0;
+  maxStonesStorage: number = 0;
+  maxCropStorage: number = 0;
   
-  maximumPopulation: number;
-  usedPopulation: number;
+  maximumPopulation: number = 0;
+  usedPopulation: number = 0;
   math = Math;
 
-  interval;
+  interval: any;
+  subscription!: Subscription;
 
   constructor(private userInformationService: UserInformationService, private router: Router) { 
+    this.updateVillage();
+  }
+  
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
+    if(this.subscription)
+      this.subscription.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.subscription = this.userInformationService.villageChanged$.subscribe(()=>{
+      clearInterval(this.interval);
+      this.updateVillage();
+    })
+  }
+
+
+  calculateTotalWorkers(village: Village)
+  {
+    return village.resourcesWorkers.cropWorkers + village.resourcesWorkers.stoneWorkers + village.resourcesWorkers.woodWorkers;
+  }
+
+  calculateTotalTroops(village: Village)
+  {
+    return village.troops.archers + village.troops.axeFighters + village.troops.catapults + village.troops.horsemen + village.troops.magicians + village.troops.spearFighters 
+    + village.troops.swordFighters;
+  }
+
+  goToStatistics()
+  {
+    this.router.navigate(['Statistics']);
+  }
+
+  goToMessages()
+  {
+    this.router.navigate(['Messages']);
+  }
+
+  updateVillage()
+  {
     let village: Village = this.userInformationService.currentVillage;
     this.woodAmount = village.resourcesAmounts.woodAmount;
     this.stonesAmount = village.resourcesAmounts.stonesAmount;
@@ -54,35 +96,6 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
 
     this.maximumPopulation = quartersPopulationByLevel[village.buildingsLevels.quartersLevel];
     this.usedPopulation = this.calculateTotalTroops(village) + this.calculateTotalWorkers(village);
-
-  }
-  ngOnDestroy(): void {
-    clearInterval(this.interval);
-  }
-
-  ngOnInit(): void {
-  }
-
-
-  calculateTotalWorkers(village: Village)
-  {
-    return village.resourcesWorkers.cropWorkers + village.resourcesWorkers.stoneWorkers + village.resourcesWorkers.woodWorkers;
-  }
-
-  calculateTotalTroops(village: Village)
-  {
-    return village.troops.archers + village.troops.axeFighters + village.troops.catapults + village.troops.horsemen + village.troops.magicians + village.troops.spearFighters 
-    + village.troops.swordFighters;
-  }
-
-  goToStatistics()
-  {
-    this.router.navigate(['Statistics']);
-  }
-
-  goToMessages()
-  {
-    this.router.navigate(['Messages']);
   }
 
 }
