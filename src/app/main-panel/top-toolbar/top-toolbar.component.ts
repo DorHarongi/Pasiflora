@@ -41,7 +41,7 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.userInformationService.villageChanged$.subscribe(()=>{
-      clearInterval(this.interval);
+      clearInterval(this.interval); // clear previous village interval
       this.updateVillage();
     })
   }

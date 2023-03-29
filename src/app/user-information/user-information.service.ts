@@ -4,6 +4,7 @@ import { User } from '../main-panel/models/User';
 import { Village } from '../main-panel/models/Village';
 import { MaterialsCost } from 'utils';
 import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class UserInformationService {
   villageChanged$: Observable<any>;
   private villageChagnedSubject: Subject<void>;
   
-  constructor() {
+  constructor(private http: HttpClient) {
     this.villageChagnedSubject = new Subject<any>();
     this.villageChanged$ = this.villageChagnedSubject.asObservable();
    }
@@ -43,9 +44,21 @@ export class UserInformationService {
 
   switchVillage(index: number)
   {
-    this.currentVillageIndex = index;
-    this.currentVillage = this.userInformation.villages[index];
-    this.villageChagnedSubject.next();
+    this.requestVillageResources(index).subscribe((villageResources: ResourcesAmounts)=>{
+      this.currentVillageIndex = index;
+      this.currentVillage = this.userInformation.villages[index];
+      this.currentVillage.resourcesAmounts = villageResources;
+      this.villageChagnedSubject.next();
+    })
+  }
+
+  requestVillageResources(newVillageIndex: number): Observable<ResourcesAmounts>
+  {
+    return this.http.post<ResourcesAmounts>("http://localhost:3000/users/villageResources",
+    {
+      username: this.userInformation.username,
+      villageIndex: newVillageIndex,
+    });
   }
 
 }
