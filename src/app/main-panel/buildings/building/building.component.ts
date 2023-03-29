@@ -49,6 +49,12 @@ export class BuildingComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkIfCenterBuildingLevelHighEnough()
+  {
+    // if we upgrade the center building there is no need to check its level, otherwise we need to check that the building level is smaller than it.
+    return this.building.name == "centerBuilding" || this.building.level < this.userInformationService.currentVillage.buildingsLevels.centerBuildingLevel;
+  }
+
   checkIfEnoughWoodToUpgrade(): boolean
   {
     return this.userInformationService.currentVillage.resourcesAmounts.woodAmount >= this.building.levelUpMaterialCost.wood;

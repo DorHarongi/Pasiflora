@@ -5,9 +5,16 @@
     <h5 class="center"> {{building.description}} </h5>
     <ng-content select="[extraInformation]"></ng-content>
     <div *ngIf = "building.levelUpMaterialCost; else maxLevel" class="center">
-        <h5 id = "requirementsText" class="center"> Level up Requirements: </h5>
-        <app-materials-cost [materialsCost]="building.levelUpMaterialCost"></app-materials-cost>
-        <button id = "upgrade" class ="buttons center" (click)="upgrade()" [disabled]="checkIfEnoughMaterialsToUpgrade() == false"> Upgrade </button>
+        <div *ngIf = "!checkIfCenterBuildingLevelHighEnough(); else centerBuildingLevelIsntHighEnough">
+            <div class="center">
+                <h4 id="maxLevel"> Your center building level is not high enough for upgrading this building. </h4>
+            </div>
+        </div>
+        <ng-template #centerBuildingLevelIsntHighEnough>
+            <h5 id = "requirementsText" class="center"> Level up Requirements: </h5>
+            <app-materials-cost [materialsCost]="building.levelUpMaterialCost"></app-materials-cost>
+            <button id = "upgrade" class ="buttons center" (click)="upgrade()" [disabled]="checkIfEnoughMaterialsToUpgrade() == false"> Upgrade </button>
+        </ng-template>
     </div>
     <ng-template #maxLevel>
         <div class="center">
