@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 
 @Component({
@@ -10,6 +10,9 @@ import { UserInformationService } from 'src/app/user-information/user-informatio
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
+
+  openAttackPopup: boolean = false;
+  userToAttack: string = "";
 
   constructor(private router: Router, private http: HttpClient, private userInformationService: UserInformationService) {
     this.username = userInformationService.userInformation.username;
@@ -46,6 +49,15 @@ export class StatisticsComponent implements OnInit, OnDestroy {
      ).subscribe((users)=>{
         this.usersInPage = users;
     })
+  }
+
+  attackPlayer(playerName: string){
+    this.userToAttack = playerName; 
+    this.openAttackPopup = true;
+  }
+
+  attackPopupClosed(){
+    this.openAttackPopup = false;
   }
 
 }

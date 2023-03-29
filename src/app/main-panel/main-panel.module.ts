@@ -49,7 +49,8 @@ import { HireWorkersComponent } from './hire-workers/hire-workers.component';
   ],
   exports:[
     MainPanelComponent,
-    TopToolbarComponent
+    TopToolbarComponent,
+    TroopsChoosingComponent
   ]
 })
 export class MainPanelModule { }

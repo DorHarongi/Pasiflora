@@ -1,0 +1,8 @@
+<div id="container" class="background round-square">
+   <h4> Attack {{defenderName }} </h4>
+   <app-troops-choosing [maxPossibleTroops]="maxPossibleTroops" (onTroopsChange)="troopsChanged($event)"></app-troops-choosing>
+   <div id="actions">
+        <button id = "attack" class="buttons center" (click)="attackVillage()"> Attack </button>
+        <button id = "back" class="buttons center" (click)="goBack()"> Back </button>
+    </div>  
+</div>

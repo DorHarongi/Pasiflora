@@ -5,9 +5,7 @@ import { spearFighterMinimumArsenalLevel, swordFighterMinimumArsenalLevel, axeFi
   archerMinimumArsenalLevel, magicianMinimumArsenalLevel, horsemenMinimumArsenalLevel, catapultsMinimumArsenalLevel,
   spearFighterAttackingStat, spearFighterDefenceStat, swordFighterAttackingStat, swordFighterDefenceStat, axeFighterAttackingStat, axeFighterDefenceStat,
   archerAttackingStat, archerDefenceStat, magicianAttackingStat, magicianDefenceStat, horsemenAttackingStat, horsemenDefenceStat, catapultsAttackingStat, 
-  catapultsDefenceStat,
-  quartersPopulationByLevel } from 'utils'
-import { Village } from '../models/Village';
+  catapultsDefenceStat } from 'utils'
 
 @Component({
   selector: 'app-troops-choosing',

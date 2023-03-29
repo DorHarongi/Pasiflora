@@ -69,3 +69,32 @@
   .player-himself{
     background: #85ff85;
   }
+
+  .icons{
+    background-color: inherit;
+    border: none;
+    outline: none;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .attack{
+    background-image: url("../../../assets//swords.png");
+    width: 24px;
+    height: 24px;
+  }
+
+  tr{
+    height: 42px;
+  }
+
+.show{
+    opacity: 1 !important;
+}
+.hide{
+    pointer-events: none;
+}
+.step{
+    opacity: 0.5;
+    transition: .25s ease-in-out all;
+}

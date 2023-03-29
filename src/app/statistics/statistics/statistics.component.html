@@ -1,5 +1,5 @@
 <app-top-toolbar></app-top-toolbar>
-<div id = "container">
+<div id = "container" [class.show]="!openAttackPopup" [class.hide]="openAttackPopup" class="step">
     <h2 id = "titleText" class="center margin-top">Statistics</h2>
     <table id="table" class="center bordered margin-top">
         <th class="center">
@@ -17,6 +17,9 @@
         <th class="center">
             Villages
         </th>
+        <th class="center">
+            Attack
+        </th>
 
         <tr *ngFor="let user of usersInPage; let i = index" class="center bordered" [class.player-himself]="user.username == username">
             <td> {{page * 10 + i + 1}}</td>
@@ -25,6 +28,11 @@
             <td *ngIf = "user.clanName == ''"> No clan </td>
             <td> {{user.population}} </td>
             <td> {{user.numberOfVillages}} </td>
+            <td> 
+                <div class ="center" *ngIf = "user.username != username">
+                    <button class="attack icons" (click)="attackPlayer(user.username)"></button>
+                </div>
+            </td>
         </tr>
     </table>
 
@@ -41,3 +49,5 @@
     
     <button id = "back" class="buttons center" (click)="goBack()"> Back </button>
 </div>
+
+<app-attack *ngIf="openAttackPopup" [defenderName]="userToAttack" (closed)="attackPopupClosed()"></app-attack>

@@ -1,0 +1,40 @@
+#container{
+    background-image: url("../../../assets//right-bg.jpg");
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 40%;
+    height: fit-content;
+    left: 30%;
+    top: 45%;
+    min-width: 700px;
+    min-height: 125px;
+    box-shadow: 1px 1px 3px 3px
+}
+
+.round-square{
+    border-radius: 7px;
+}
+
+#actions{
+    display: flex;
+}
+
+.center{
+    align-self: center; 
+}
+
+h4{
+    margin-top: 25px;
+}
+
+.buttons {
+    background-image: url(../../../assets/top-bg.png);
+    border: 1px black solid;
+    outline: none;
+    border-radius: 0.25rem;
+    box-shadow: 2px 2px 2px 2px;
+    margin: 25px 15px 25px 15px;
+    width: 100px;
+}
