@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { warehouseStorageByLevel, quartersPopulationByLevel } from 'utils';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { ResourcesAmounts } from '../models/resourcesAmounts';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Village } from '../models/Village';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';

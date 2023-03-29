@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ResourcesAmounts } from '../main-panel/models/resourcesAmounts';
 import { User } from '../main-panel/models/User';
 import { Village } from '../main-panel/models/Village';
-import { MaterialsCost } from 'utils';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -44,17 +43,17 @@ export class UserInformationService {
 
   switchVillage(index: number)
   {
-    this.requestVillageResources(index).subscribe((villageResources: ResourcesAmounts)=>{
+    this.requestVillage(index).subscribe((village: Village)=>{
+      this.userInformation.villages[index] = village; // get updated village for updated resources, updated troops in case of attack
       this.currentVillageIndex = index;
       this.currentVillage = this.userInformation.villages[index];
-      this.currentVillage.resourcesAmounts = villageResources;
       this.villageChagnedSubject.next();
     })
   }
 
-  requestVillageResources(newVillageIndex: number): Observable<ResourcesAmounts>
+  requestVillage(newVillageIndex: number): Observable<Village>
   {
-    return this.http.post<ResourcesAmounts>("http://localhost:3000/users/villageResources",
+    return this.http.post<Village>("http://localhost:3000/users/village",
     {
       username: this.userInformation.username,
       villageIndex: newVillageIndex,

@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/login/login.service';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { Village } from '../models/Village';
 
