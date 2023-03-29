@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { UserInformationService } from 'src/app/user-information/user-information.service';
 
 @Component({
   selector: 'app-statistics',
@@ -10,7 +11,9 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private userInformationService: UserInformationService) {
+    this.username = userInformationService.userInformation.username;
+   }
 
   ngOnDestroy(): void {
     if(this.subscription)
@@ -20,6 +23,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   page: number = 0;
   usersInPage: Array<any> = [];
   subscription!: Subscription;
+  username: string;
 
   ngOnInit(): void {
     this.getUserStatistics();

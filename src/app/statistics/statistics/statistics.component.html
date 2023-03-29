@@ -18,7 +18,7 @@
             Villages
         </th>
 
-        <tr *ngFor="let user of usersInPage; let i = index" class="center bordered">
+        <tr *ngFor="let user of usersInPage; let i = index" class="center bordered" [class.player-himself]="user.username == username">
             <td> {{page * 10 + i + 1}}</td>
             <td> {{user.username}} </td>
             <td *ngIf = "user.clanName != ''"> {{user.clanName}} </td>
