@@ -1,3 +1,12 @@
+$topToolbarHeight: 7.5vh;
+$topToolbarMinHeight: 75px;
+
+.statisticsContainer {
+  min-width: 100%;
+  margin-top: max($topToolbarHeight, $topToolbarMinHeight);
+  min-height: 92.5vh;
+}
+
 .buttons {
     background-image: url(../../../assets/top-bg.png);
     border: 1px black solid;
@@ -15,19 +24,6 @@
 .center{
     align-self: center;
     text-align: center; 
-}
-
-#container {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    background-image: url("../../../assets//right-bg.jpg");
-    width: 100%;
-    overflow-y: scroll;
-    margin-top: 7.5vh;
-    height: 92.5%;
-    position: absolute;
-
 }
 
 .bordered{

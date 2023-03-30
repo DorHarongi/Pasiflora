@@ -1,14 +1,12 @@
-#container {
-    background: url("../../../assets/right-bg.jpg");
+.toolbarContainer {
+    flex-direction: row;
     border-left: 2px black solid;
-    position: absolute;
-    display: flex;
-    flex-wrap: wrap;
     align-content: flex-start;
     justify-content: space-around;
     width: -webkit-fill-available;
     min-width: 600px;
     height: -webkit-fill-available;
+    position: absolute;
 }
 
 .subContainer {

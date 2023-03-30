@@ -1,3 +1,9 @@
+#mainPanel{
+    display: flex;
+    margin-top: max($topToolbarHeight, $topToolbarMinHeight);
+    position: relative
+}
+
 #buildingsMap{
     cursor: pointer;
 }

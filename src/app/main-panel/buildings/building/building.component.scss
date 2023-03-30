@@ -1,16 +1,12 @@
+$topToolbarHeight: 7.5vh;
+$topToolbarMinHeight: 75px;
 
-
-#container {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    background-image: url("../../../../assets//right-bg.jpg");
-    width: 100%;
-    overflow-y: scroll;
+.buildingContainer {
+    min-width: 100%;
     margin-top: 7.5vh;
-    height: 92.5%;
-    position: absolute;
-
+    min-height: 92.5vh;
+    align-content: unset;
+    text-align: center;
 }
 
 .center{

@@ -1,8 +1,16 @@
-
 html,body{
     overflow-y: auto;
 }
 
 body{
     margin: 0;
+}
+
+.flexContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    background-image: url("./assets//right-bg.jpg");
+    overflow: auto;
 }
