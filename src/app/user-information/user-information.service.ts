@@ -32,7 +32,7 @@ export class UserInformationService {
     else // after a request to the server like training troops
     {
       this.currentVillage = this.userInformation.villages[this.currentVillageIndex];
-      //this.villageChagnedSubject.next();
+      this.villageChagnedSubject.next();
     }
   }
 

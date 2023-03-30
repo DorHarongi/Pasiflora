@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from './login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'client';
+
+  constructor(private loginService: LoginService) { }
+
+  isLoggedIn(): boolean
+  {
+    return this.loginService.isloggedIn;
+  }
 }

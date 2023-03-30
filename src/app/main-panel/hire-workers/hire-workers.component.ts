@@ -15,15 +15,16 @@ export class HireWorkersComponent implements OnInit {
 
   @Output() onWorkersChange = new EventEmitter<number>();
 
-  maxPossibleWorkers: number;
+  maxPossibleWorkers: number = 0;
+  workersBeforeAnyChanges: number = 0;
 
 
   constructor(private userInformationService: UserInformationService) { 
-    this.maxPossibleWorkers = this.checkFreePopulation();
   }
 
   ngOnInit(): void {
-    this.maxPossibleWorkers += this.workers;
+    this.workersBeforeAnyChanges = this.workers;
+    this.maxPossibleWorkers = this.checkFreePopulation();
   }
 
   checkFreePopulation(): number
@@ -32,6 +33,7 @@ export class HireWorkersComponent implements OnInit {
     let maximumPopulation: number = quartersPopulationByLevel[village.buildingsLevels.quartersLevel];
     let usedPopulation: number = this.calculateTotalTroops(village) + this.calculateTotalWorkers(village);
     let freePopulation = maximumPopulation - usedPopulation;
+    freePopulation += this.workersBeforeAnyChanges;
     return freePopulation;
   }
 
