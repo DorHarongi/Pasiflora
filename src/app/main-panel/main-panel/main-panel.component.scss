@@ -1,3 +1,6 @@
+$topToolbarHeight: 7.5vh;
+$topToolbarMinHeight: 75px;
+
 #mainPanel{
     display: flex;
     margin-top: max($topToolbarHeight, $topToolbarMinHeight);

@@ -1,12 +1,14 @@
+$chooseTroopsPanelSize: 700px;
+
 .attackContainer{
-    width: 40%;
     height: fit-content;
-    left: 30%;
+    left: calc((100% - $chooseTroopsPanelSize) / 2);
     top: 45%;
     min-width: 700px;
     min-height: 125px;
     box-shadow: 1px 1px 3px 3px;
     align-items: center;
+    position: absolute;
 }
 
 .round-square{
