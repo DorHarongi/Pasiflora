@@ -67,6 +67,11 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
     this.router.navigate(['Messages']);
   }
 
+  goToHome()
+  {
+    this.router.navigate(['home']);
+  }
+
   updateVillage()
   {
     let village: Village = this.userInformationService.currentVillage;
