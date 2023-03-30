@@ -1,12 +1,14 @@
 #container {
     background: url("../../../assets/right-bg.jpg");
-    height: 100%;
     border-left: 2px black solid;
     position: absolute;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: space-around;
+    width: -webkit-fill-available;
+    min-width: 600px;
+    height: -webkit-fill-available;
 }
 
 .subContainer {
@@ -62,6 +64,7 @@ h4 {
     height: 25px;
     margin-right: 7px;
 }
+
 
 li{
     cursor: pointer;

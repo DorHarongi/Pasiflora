@@ -17,8 +17,6 @@ export class RightToolbarComponent implements OnInit, OnDestroy {
   woodProduction!: number;
   stoneProduction!: number;
 
-  widthStyle = {};
-
   spearFighters!: number;
   swordFighters!: number;
   axeFighters!: number;
@@ -40,10 +38,6 @@ export class RightToolbarComponent implements OnInit, OnDestroy {
     this.villages = this.userInformationService.userInformation.villages.map((village: Village)=>{
       return village.villageName;
     });
-
-    this.widthStyle = {
-      "width": screen.width - 1296 + "px"
-    };
 
     this.subscription = this.userInformationService.villageChanged$.subscribe(()=>{
       this.updateVillage();
