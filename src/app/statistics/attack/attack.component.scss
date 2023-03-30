@@ -1,9 +1,15 @@
-$chooseTroopsPanelSize: 700px;
+$chooseTroopsPanelWidth: 700px;
+$chooseTroopsPanelHeight: 297.8px;
+$topToolbarHeight: max(7.5vh, 75px);
+$MaybeNegativeAttackPanelLeft: calc((100% - $chooseTroopsPanelWidth) / 2);
+$MaybeNegativeattackPanelTop: calc((100% - $chooseTroopsPanelHeight - $topToolbarHeight) / 2);
+$attackPanelLeft: max($MaybeNegativeAttackPanelLeft, 0px);
+$attackPanelTop: max($MaybeNegativeattackPanelTop, 0px);
 
 .attackContainer{
     height: fit-content;
-    left: calc((100% - $chooseTroopsPanelSize) / 2);
-    top: 45%;
+    left: $attackPanelLeft;
+    top: $attackPanelTop;
     min-width: 700px;
     min-height: 125px;
     box-shadow: 1px 1px 3px 3px;
