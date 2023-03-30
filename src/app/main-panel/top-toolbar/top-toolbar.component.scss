@@ -8,6 +8,8 @@
     position: fixed;
     display: flex;
     overflow-x: scroll;
+    min-height: 75px;
+    min-width: fit-content;
 }
 
 .clickable{
@@ -23,6 +25,9 @@
     display: flex;
     align-items: center;
     height: 100%;
+    min-width: fit-content;
+    overflow-x: auto;
+    width: 100px;
 }
 
 .right-side {
@@ -44,4 +49,6 @@
 
 h5 {
     font-variant-numeric: tabular-nums;
+    min-width: fit-content;
+    width: 100px;
 }
