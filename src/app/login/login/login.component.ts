@@ -54,11 +54,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
 
         this.loading = true;
-        this.subscription =  this.loginService.login(this.form['username'].value, this.form['password'].value).subscribe(()=>{
-          this.router.navigate(['home']);
-        },()=>{
-          this.loading = false;
-        })
+        this.subscription = this.loginService.login(this.form['username'].value, this.form['password'].value).subscribe({
+             error:()=>{
+                this.loading = false;
+            }
+        });
 
             
     }
