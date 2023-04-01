@@ -1,5 +1,6 @@
 
 import { Routes } from '@angular/router';
+import { InboxComponent } from './inbox/inbox/inbox.component';
 import { AuthGuardService } from './login/auth-guard.service';
 import { LoginComponent } from './login/login/login.component';
 import { ArsenalComponent } from './main-panel/buildings/arsenal/arsenal.component';
@@ -21,6 +22,7 @@ import { StatisticsComponent } from './statistics/statistics/statistics.componen
 export const appRoutes: Routes = [
   { path: 'home', component: MainPanelComponent, canActivate : [AuthGuardService] },
   { path: 'login', component: LoginComponent},
+  { path: 'Inbox', component: InboxComponent, canActivate : [AuthGuardService] },
   { path: 'CenterBuilding', component: CenterBuildingComponent, canActivate : [AuthGuardService] },
   { path: 'WoodWarehouse', component: WoodWarehouseComponent, canActivate : [AuthGuardService] },
   { path: 'WoodFactory', component: WoodFactoryComponent, canActivate : [AuthGuardService] },

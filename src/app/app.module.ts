@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
+import { InboxModule } from './inbox/inbox.module';
 import { LoginModule } from './login/login.module';
 import { MainPanelModule } from './main-panel/main-panel.module';
 import { StatisticsModule } from './statistics/statistics.module';
@@ -14,6 +15,7 @@ import { StatisticsModule } from './statistics/statistics.module';
   imports: [
     BrowserModule,
     StatisticsModule,
+    InboxModule,
     MainPanelModule,
     LoginModule,
     RouterModule.forRoot(appRoutes),

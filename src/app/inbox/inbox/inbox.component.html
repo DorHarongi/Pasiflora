@@ -1,0 +1,20 @@
+<div class = "flexContainer inboxContainer">
+    
+    <app-reports *ngIf = "activeContent == activeContentEnum.Reports"></app-reports>
+    <app-messages *ngIf = "activeContent == activeContentEnum.Messages"></app-messages>
+
+
+    <div class="pagination center margin-top">
+        <p (click)="moveToPage(1)">&laquo;</p>
+        <p (click)="moveToPage(1)" [class.active] = 'page == 1'>1</p>
+        <p (click)="moveToPage(2)" [class.active] = 'page == 2'>2</p>
+        <p (click)="moveToPage(3)" [class.active] = 'page == 3'>3</p>
+        <p (click)="moveToPage(4)" [class.active] = 'page == 4'>4</p>
+        <p (click)="moveToPage(5)" [class.active] = 'page == 5'>5</p>
+        <p (click)="moveToPage(6)" [class.active] = 'page == 6'>6</p>
+        <p href="#">&raquo;</p>
+      </div>
+    
+    <button id = "back" class="buttons center" (click)="goBack()"> Back </button>
+</div>
+

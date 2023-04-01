@@ -1,0 +1,51 @@
+$topToolbarHeight: 7.5vh;
+$topToolbarMinHeight: 75px;
+
+.inboxContainer {
+  min-width: 100%;
+  margin-top: max($topToolbarHeight, $topToolbarMinHeight);
+  min-height: 92.5vh;
+}
+
+.pagination {
+    display: inline-block;
+    margin-top: 2%
+}
+  
+.pagination p {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pagination p.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination p:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.buttons {
+    background-image: url(../../../assets/top-bg.png);
+    border: 1px black solid;
+    outline: none;
+    border-radius: 0.25rem;
+    box-shadow: 2px 2px 2px 2px;
+}
+
+#back {
+    width: 100px;
+    margin-top: 50px;
+    height: 50px;
+}
+
+.center{
+    align-self: center;
+    text-align: center; 
+}

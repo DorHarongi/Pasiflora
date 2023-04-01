@@ -64,7 +64,7 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
 
   goToMessages()
   {
-    this.router.navigate(['Messages']);
+    this.router.navigate(['Inbox']);
   }
 
   goToHome()
