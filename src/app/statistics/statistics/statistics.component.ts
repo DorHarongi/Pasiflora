@@ -23,7 +23,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
   }
 
-  page: number = 0;
+  page: number = 1;
   usersInPage: Array<any> = [];
   subscription!: Subscription;
   username: string;
