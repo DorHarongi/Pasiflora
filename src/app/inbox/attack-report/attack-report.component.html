@@ -1,6 +1,6 @@
 <div class = "flexContainer attackContainer round-square">
     <div *ngFor="let troopTypeKeyValue of troopDictionariesByType | keyvalue">
-
+        <!-- this ng for runs 3 times - 1st attacker for troops, 2nd defender troops, 3rd support troops -->
         <div *ngIf = "troopTypeKeyValue.key == 'attacker'" >
             <h5> Attacker: {{attackReport.attackerName}} </h5>
             <h5> Village: {{attackReport.attackerVillageName}} </h5>
@@ -9,9 +9,9 @@
         <div *ngIf = "troopTypeKeyValue.key == 'defender'" >
             <h5> Defender: {{attackReport.defenderName}}</h5>
             <h5> Village: {{attackReport.defenderVillageName}}</h5>
-            <h5> Defender army defence: {{attackReport.defenderTotalArmyDefence}}</h5>
+            <h5 *ngIf ="!userAttackedAndLost"> Defender army defence: {{attackReport.defenderTotalArmyDefence}}</h5>
         </div>
-        <div *ngIf = "troopTypeKeyValue.key == 'support'" >
+        <div *ngIf = "troopTypeKeyValue.key == 'support' && !userAttackedAndLost" >
             <h5> Support army defence: {{attackReport.defenderTotalSupportArmyDefence}} </h5>
         </div>
 
@@ -65,10 +65,17 @@
         </table>
     </div>
 
-    <h5 class="floatLeft">
+    <h5 *ngIf="!userAttackedAndLost; else noneOfYourArmyReturned">
         Wall defence:
         {{attackReport.wallDefence}}
     </h5>
+
+    <ng-template #noneOfYourArmyReturned>
+        <h5> Defender: {{attackReport.defenderName}}</h5>
+        <h5> Village: {{attackReport.defenderVillageName}}</h5>
+        <h5>None of your soldiers retruned.</h5>
+    </ng-template>
+    
 
     <div class="flex"> 
         <h5> Loot stolen: </h5>
