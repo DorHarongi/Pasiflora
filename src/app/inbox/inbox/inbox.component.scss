@@ -59,7 +59,7 @@ $topToolbarMinHeight: 75px;
     width: 725px;
 }
 
-tr{
+tr, td{
     height: 50px;
 }
 
@@ -68,14 +68,16 @@ tr{
 }
 
 .icons{
+    vertical-align: unset;
     height: 24px;
     width: 24px;
     margin-right: 5px;
     margin-left: 10px;
 }
 
-.floatLeft{
-    float: left;
+.title{
+    display: flex;
+    align-items: center;
 }
 
 .show{

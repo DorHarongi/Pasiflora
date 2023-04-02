@@ -12,7 +12,7 @@
          </th>
 
          <tr (click)="openAttackReportPopup(attackReport)" *ngFor="let attackReport of attackReportsInPage" class="bordered">
-            <td class="floatLeft">
+            <td class="title">
                 <img *ngIf = "attackReport.attackerName == this.username" src="../../../assets/swords.png" class="icons"> 
                 <img *ngIf = "attackReport.attackerName != this.username" src="../../../assets/shield.png" class="icons"> 
                 {{makeAttackReportTitle(attackReport)}}
