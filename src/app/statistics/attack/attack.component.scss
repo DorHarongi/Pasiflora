@@ -4,17 +4,17 @@ $topToolbarHeight: max(7.5vh, 75px);
 $MaybeNegativeAttackPanelLeft: calc((100% - $chooseTroopsPanelWidth) / 2);
 $MaybeNegativeattackPanelTop: calc((100% - $chooseTroopsPanelHeight) / 2 + $topToolbarHeight / 2);
 $attackPanelLeft: max($MaybeNegativeAttackPanelLeft, 0px);
-$attackPanelTop: max($MaybeNegativeattackPanelTop, 0px);
+$attackPanelTop: max($MaybeNegativeattackPanelTop, $topToolbarHeight);
 
 .attackContainer{
     height: fit-content;
     left: $attackPanelLeft;
     top: $attackPanelTop;
-    min-width: 700px;
-    min-height: 125px;
+    max-width: 100%;
+    max-height: 50%;
     box-shadow: 1px 1px 3px 3px;
-    align-items: center;
     position: absolute;
+    flex-wrap: nowrap;
 }
 
 .round-square{
@@ -27,6 +27,7 @@ $attackPanelTop: max($MaybeNegativeattackPanelTop, 0px);
 
 .center{
     align-self: center; 
+    align-items: center;
 }
 
 h4{

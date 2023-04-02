@@ -1,19 +1,20 @@
-$chooseTroopsPanelWidth: 700px;
-$chooseTroopsPanelHeight: 811.69px;
+$attackReportPanelWidth: 700px;
+$attackReportPanelHeight: 80%;
 $topToolbarHeight: max(7.5vh, 75px);
-$MaybeNegativeAttackPanelLeft: calc((100% - $chooseTroopsPanelWidth) / 2);
-$MaybeNegativeattackPanelTop: calc((100% - $chooseTroopsPanelHeight) / 2 + $topToolbarHeight / 2);
+$MaybeNegativeAttackPanelLeft: calc((100% - $attackReportPanelWidth) / 2);
+$MaybeNegativeattackPanelTop: calc((100% - $attackReportPanelHeight) / 2 + $topToolbarHeight / 2);
 $attackPanelLeft: max($MaybeNegativeAttackPanelLeft, 0px);
-$attackPanelTop: max($MaybeNegativeattackPanelTop, 0px);
+$attackPanelTop: max($MaybeNegativeattackPanelTop, $topToolbarHeight);
 
 .attackContainer{
-    height: fit-content;
+    height: $attackReportPanelHeight;
     left: $attackPanelLeft;
     top: $attackPanelTop;
-    min-width: 700px;
+    max-width: 100%;
     min-height: 125px;
     box-shadow: 1px 1px 3px 3px;
-    position: absolute;
+    position: fixed;
+    flex-wrap: nowrap;
 }
 
 .round-square{
@@ -30,7 +31,7 @@ $attackPanelTop: max($MaybeNegativeattackPanelTop, 0px);
     outline: none;
     border-radius: 0.25rem;
     box-shadow: 2px 2px 2px 2px;
-    margin: 25px 15px 25px 15px;
+    margin-bottom: 3%;
     width: 100px;
 }
 
@@ -49,8 +50,8 @@ $attackPanelTop: max($MaybeNegativeattackPanelTop, 0px);
 }
 
 table{
-    margin-bottom: 50px;
-    margin-top: 20px;
+    margin-bottom: 5%;
+    margin-top: 2%;
 }
 
 .flex{
@@ -58,9 +59,8 @@ table{
     align-items: center;
     height: 100%;
     min-width: fit-content;
-    overflow-x: auto;
     width: 100px;
-    margin-top: 30px;
+    margin-top: 3%;
 }
 
 h5 {
