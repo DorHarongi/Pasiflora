@@ -1,5 +1,5 @@
 $chooseTroopsPanelWidth: 700px;
-$chooseTroopsPanelHeight: 297.8px;
+$chooseTroopsPanelHeight: 811.69px;
 $topToolbarHeight: max(7.5vh, 75px);
 $MaybeNegativeAttackPanelLeft: calc((100% - $chooseTroopsPanelWidth) / 2);
 $MaybeNegativeattackPanelTop: calc((100% - $chooseTroopsPanelHeight) / 2 + $topToolbarHeight / 2);
@@ -13,7 +13,6 @@ $attackPanelTop: max($MaybeNegativeattackPanelTop, 0px);
     min-width: 700px;
     min-height: 125px;
     box-shadow: 1px 1px 3px 3px;
-    align-items: center;
     position: absolute;
 }
 
@@ -21,16 +20,8 @@ $attackPanelTop: max($MaybeNegativeattackPanelTop, 0px);
     border-radius: 7px;
 }
 
-#actions{
-    display: flex;
-}
-
 .center{
     align-self: center; 
-}
-
-h4{
-    margin-top: 25px;
 }
 
 .buttons {
@@ -41,4 +32,45 @@ h4{
     box-shadow: 2px 2px 2px 2px;
     margin: 25px 15px 25px 15px;
     width: 100px;
+}
+
+.icons{
+    width: 25px;
+    height: 25px;
+    display: block;
+    margin: 0 auto;
+}
+
+.troopsInput{
+    width: 90px;
+    padding: 2px 3px 2px 0px;
+    border: 1px solid #7d5210;
+    text-align: center;
+}
+
+table{
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    min-width: fit-content;
+    overflow-x: auto;
+    width: 100px;
+    margin-top: 30px;
+}
+
+h5 {
+    font-variant-numeric: tabular-nums;
+    min-width: fit-content;
+    width: max-content;
+    font-size:medium;
+}
+
+.resourcelIcons{
+    margin-left: 10px;
+    margin-right: 3px;
 }

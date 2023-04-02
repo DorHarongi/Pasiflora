@@ -1,0 +1,84 @@
+<div class = "flexContainer attackContainer round-square">
+    <div *ngFor="let troopTypeKeyValue of troopDictionariesByType | keyvalue">
+
+        <div *ngIf = "troopTypeKeyValue.key == 'attacker'" >
+            <h5> Attacker: {{attackReport.attackerName}} </h5>
+            <h5> Village: {{attackReport.attackerVillageName}} </h5>
+            <h5> Attacker total attack: {{attackReport.attackerTotalAttack}} </h5>
+        </div>
+        <div *ngIf = "troopTypeKeyValue.key == 'defender'" >
+            <h5> Defender: {{attackReport.defenderName}}</h5>
+            <h5> Village: {{attackReport.defenderVillageName}}</h5>
+            <h5> Defender army defence: {{attackReport.defenderTotalArmyDefence}}</h5>
+        </div>
+        <div *ngIf = "troopTypeKeyValue.key == 'support'" >
+            <h5> Support army defence: {{attackReport.defenderTotalSupportArmyDefence}} </h5>
+        </div>
+
+        <table>
+            <tr>
+                <th>
+                    <img class = "icons" src="../../../../assets//spear.png">
+                </th>
+                <th>
+                    <img class = "icons" src="../../../../assets//sword.png">
+                </th>
+                <th>
+                    <img class = "icons" src="../../../../assets//axe.png">
+                </th>
+                <th>
+                    <img class = "icons" src="../../../../assets//bow.png">
+                </th>
+                <th>
+                    <img class = "icons" src="../../../../assets//hat.png">
+                </th>
+                <th>
+                    <img class = "icons" src="../../../../assets//horse.png">
+                </th>
+                <th>
+                    <img class = "icons" src="../../../../assets//trebuchet.png">
+                </th>
+            </tr>
+            <tr *ngFor = "let troops of troopDictionariesByType[troopTypeKeyValue.key]">
+                <!-- this ng for runs twice - 1st total troops, 2nd for dead troops -->
+                <td>
+                    <input disabled class = "troopsInput" [value]="troops.spearFighters">
+                <td>
+                    <input disabled class = "troopsInput" [value]="troops.swordFighters">
+                </td>
+                <td>
+                    <input disabled class = "troopsInput" [value]="troops.axeFighters">
+                </td>
+                <td>
+                    <input disabled class = "troopsInput" [value]="troops.archers">
+                </td>
+                <td>
+                    <input disabled class = "troopsInput" [value]="troops.magicians">
+                </td>
+                <td>
+                    <input disabled class = "troopsInput"  [value]="troops.horsemen">
+                </td>
+                <td>
+                    <input disabled class = "troopsInput" [value]="troops.catapults">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h5 class="floatLeft">
+        Wall defence:
+        {{attackReport.wallDefence}}
+    </h5>
+
+    <div class="flex"> 
+        <h5> Loot stolen: </h5>
+        <img class="icons resourcelIcons" src="../../../assets/crop.jpg">
+        <h5>{{attackReport.lootedResources.cropAmount.toFixed(0)}}</h5>
+        <img class="icons resourcelIcons" src="../../../assets/wood.jpg">
+        <h5> {{attackReport.lootedResources.woodAmount.toFixed(0)}}</h5>
+        <img class="icons resourcelIcons" src="../../../assets/rock.jpg">
+        <h5>{{attackReport.lootedResources.stonesAmount.toFixed(0)}}</h5>
+    </div>
+
+    <button id = "back" class="buttons center" (click)="goBack()"> Back </button>
+</div>

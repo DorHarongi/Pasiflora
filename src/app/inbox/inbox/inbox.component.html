@@ -1,9 +1,29 @@
-<div class = "flexContainer inboxContainer">
+<div class = "flexContainer inboxContainer step" [class.show]="!attackReportPopupOpened" [class.hide]="attackReportPopupOpened">
+
+    <table id="table" class="center bordered margin-top">
+        <th class="center">
+            Title 
+         </th>
+         <th class="center">
+            Result 
+         </th>
+         <th class="center">
+            Date 
+         </th>
+
+         <tr (click)="openAttackReportPopup(attackReport)" *ngFor="let attackReport of attackReportsInPage" class="bordered">
+            <td class="floatLeft">
+                <img *ngIf = "attackReport.attackerName == this.username" src="../../../assets/swords.png" class="icons"> 
+                <img *ngIf = "attackReport.attackerName != this.username" src="../../../assets/shield.png" class="icons"> 
+                {{makeAttackReportTitle(attackReport)}}
+            </td>
+            
+            <td>{{getAttackResult(attackReport)}}</td>
+
+            <td> {{attackReport.date | date:'d/MM/yyyy H:mm'}} </td>
+        </tr>
+    </table>
     
-    <app-reports *ngIf = "activeContent == activeContentEnum.Reports"></app-reports>
-    <app-messages *ngIf = "activeContent == activeContentEnum.Messages"></app-messages>
-
-
     <div class="pagination center margin-top">
         <p (click)="moveToPage(1)">&laquo;</p>
         <p (click)="moveToPage(1)" [class.active] = 'page == 1'>1</p>
@@ -13,8 +33,11 @@
         <p (click)="moveToPage(5)" [class.active] = 'page == 5'>5</p>
         <p (click)="moveToPage(6)" [class.active] = 'page == 6'>6</p>
         <p href="#">&raquo;</p>
-      </div>
+    </div>
     
     <button id = "back" class="buttons center" (click)="goBack()"> Back </button>
 </div>
+
+<app-attack-report *ngIf="attackReportPopupOpened" [attackReport]="clickedAttackReport" (closed)="attackReportPopupClosed()"></app-attack-report>
+
 

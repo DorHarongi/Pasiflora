@@ -5,6 +5,7 @@ $topToolbarMinHeight: 75px;
   min-width: 100%;
   margin-top: max($topToolbarHeight, $topToolbarMinHeight);
   min-height: 92.5vh;
+  align-content: unset;
 }
 
 .pagination {
@@ -48,4 +49,42 @@ $topToolbarMinHeight: 75px;
 .center{
     align-self: center;
     text-align: center; 
+}
+
+.bordered{
+    border: 2px black solid;
+}
+
+#table{
+    width: 725px;
+}
+
+tr{
+    height: 50px;
+}
+
+.margin-top{
+  margin-top: 2%
+}
+
+.icons{
+    height: 24px;
+    width: 24px;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.show{
+    opacity: 1 !important;
+}
+.hide{
+    pointer-events: none;
+}
+.step{
+    opacity: 0.5;
+    transition: .25s ease-in-out all;
 }
