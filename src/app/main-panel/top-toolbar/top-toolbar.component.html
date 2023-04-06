@@ -6,15 +6,15 @@
     </div>
     <div class="right-side flex-container">
         <img class="icons" src="../../../assets/energy.png">
-        <h5> {{math.floor(energy)}} / {{maxEnergy}}</h5>
-        <h5 *ngIf = "energy != maxEnergy" id="timeTillNextEnergy"> ( {{getTimeTillNextEnergy() | date:'mm:ss'}} )</h5>
+        <h5> {{math.floor(getEnergy())}} / {{maxEnergy}}</h5>
+        <h5 *ngIf = "getEnergy() != maxEnergy" id="timeTillNextEnergy"> ( {{getTimeTillNextEnergy() | date:'mm:ss'}} )</h5>
         <img class="icons" src="../../../assets/population.png">
         <h5> {{usedPopulation}} / {{maximumPopulation}}</h5>
         <img class="icons" src="../../../assets/crop.jpg">
-        <h5> {{math.floor(cropAmount)}} / {{maxCropStorage}}</h5>
+        <h5> {{math.floor(resources.cropAmount)}} / {{maxCropStorage}}</h5>
         <img class="icons" src="../../../assets/wood.jpg">
-        <h5> {{math.floor(woodAmount)}} / {{maxWoodStorage}}</h5>
+        <h5> {{math.floor(resources.woodAmount)}} / {{maxWoodStorage}}</h5>
         <img class="icons" src="../../../assets/rock.jpg">
-        <h5> {{math.floor(stonesAmount)}} / {{maxStonesStorage}}</h5>
+        <h5> {{math.floor(resources.stonesAmount)}} / {{maxStonesStorage}}</h5>
     </div>
 </div>

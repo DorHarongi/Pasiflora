@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { UserInformationService } from 'src/app/user-information/user-information.service';
 import { BuildingTypes } from '../models/BuildingTypes';
 import { Village } from '../models/Village';
+import { IntervalService } from '../services/interval.service';
 
 @Component({
   selector: 'app-main-panel',
@@ -15,7 +16,11 @@ export class MainPanelComponent implements OnInit, OnDestroy {
   hoveredBuildingIndex: number = -1;
   village!: Village;
   subscription!: Subscription;
-  constructor(private userInformationService: UserInformationService, private router: Router) { }
+  constructor(private userInformationService: UserInformationService, private router: Router,
+     private intervalService: IntervalService)
+  { 
+    this.intervalService.startResourceGatheringInterval();
+  }
 
   ngOnDestroy(): void {
     if(this.subscription)

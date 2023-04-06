@@ -36,15 +36,6 @@ export class UserInformationService {
     }
   }
 
-  updateResourcesAmount(resourcesAmounts: ResourcesAmounts)
-  {
-    this.currentVillage.resourcesAmounts = resourcesAmounts;
-  }
-
-  updateEnergy(energy: number){
-    this.userInformation.energy = energy;
-  }
-
   switchVillage(index: number)
   {
     this.requestVillage(index).subscribe((village: Village)=>{
@@ -55,13 +46,26 @@ export class UserInformationService {
     })
   }
 
-  requestVillage(newVillageIndex: number): Observable<Village>
+  updateUser(): void
+  {
+    this.requestUser().subscribe((user: User)=>{
+      this.setUserInformation(user);
+    })
+  }
+
+  private requestVillage(newVillageIndex: number): Observable<Village>
   {
     return this.http.post<Village>("http://localhost:3000/users/village",
     {
       username: this.userInformation.username,
       villageIndex: newVillageIndex,
     });
+  }
+
+  private requestUser(): Observable<User>
+  {
+    let username = this.userInformation.username;
+    return this.http.get<User>("http://localhost:3000/users/" + username);
   }
 
 }

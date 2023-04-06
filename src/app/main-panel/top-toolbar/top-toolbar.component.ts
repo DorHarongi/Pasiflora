@@ -13,10 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class TopToolbarComponent implements OnInit, OnDestroy {
 
-  woodAmount!: number;
-  stonesAmount!: number;
-  cropAmount!: number;
-  energy!: number;
+  resources!: ResourcesAmounts;
 
   maxWoodStorage: number = 0;
   maxStonesStorage: number = 0;
@@ -27,7 +24,6 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
   usedPopulation: number = 0;
   math = Math;
 
-  interval: any;
   subscription!: Subscription;
 
   constructor(private userInformationService: UserInformationService, private router: Router) { 
@@ -35,14 +31,12 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
   }
   
   ngOnDestroy(): void {
-    clearInterval(this.interval);
     if(this.subscription)
       this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
     this.subscription = this.userInformationService.villageChanged$.subscribe(()=>{
-      clearInterval(this.interval); // clear previous village interval
       this.updateVillage();
     })
   }
@@ -77,30 +71,8 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
   updateVillage()
   {
     let village: Village = this.userInformationService.currentVillage;
-    this.woodAmount = village.resourcesAmounts.woodAmount;
-    this.stonesAmount = village.resourcesAmounts.stonesAmount;
-    this.cropAmount = village.resourcesAmounts.cropAmount;
-    this.energy = this.userInformationService.userInformation.energy;
 
-    this.interval = setInterval(()=>{
-      this.woodAmount += village.woodProductionPerSecond;
-      this.stonesAmount += village.stoneProductionPerSecond;
-      this.cropAmount += village.cropProductionPerSecond;
-      this.energy += energyProductionSpeedPerSecond;
-
-      if(this.woodAmount > this.maxWoodStorage)
-        this.woodAmount = this.maxWoodStorage;
-      if(this.cropAmount > this.maxCropStorage)
-        this.cropAmount = this.maxCropStorage;
-      if(this.stonesAmount > this.maxStonesStorage)
-        this.stonesAmount = this.maxStonesStorage;
-      if(this.energy > this.maxEnergy)
-        this.energy = this.maxEnergy;
-
-      this.userInformationService.updateResourcesAmount(new ResourcesAmounts(this.woodAmount, this.stonesAmount, this.cropAmount));
-      this.userInformationService.updateEnergy(this.energy);
-
-    }, 1000)
+    this.resources = village.resourcesAmounts
 
     this.maxWoodStorage = warehouseStorageByLevel[village.buildingsLevels.woodWarehouseLevel];
     this.maxStonesStorage = warehouseStorageByLevel[village.buildingsLevels.stoneWarehouseLevel];
@@ -111,8 +83,13 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
     this.usedPopulation = this.calculateTotalTroops(village) + this.calculateTotalWorkers(village);
   }
 
+  getEnergy(): number{
+    return this.userInformationService.userInformation.energy;
+  }
+
   getTimeTillNextEnergy(): number{
-    let energyLeftTillNext: number = 1 - this.energy % 1;
+    let currentEnergy: number = this.getEnergy(); 
+    let energyLeftTillNext: number = 1 - currentEnergy % 1;
     let secondsLeft: number = energyLeftTillNext / energyProductionSpeedPerSecond;
     let currentDate: Date = new Date();
     let dateWhenNextEnergy: Date = new Date();

@@ -21,7 +21,6 @@ import { TroopsChoosingComponent } from './troops-choosing/troops-choosing.compo
 import { HireWorkersComponent } from './hire-workers/hire-workers.component';
 
 
-
 @NgModule({
   declarations: [
     MainPanelComponent,
