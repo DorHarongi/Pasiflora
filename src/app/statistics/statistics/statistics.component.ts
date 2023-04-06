@@ -60,4 +60,9 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     this.openAttackPopup = false;
   }
 
+  getEnergy(): number
+  {
+    return this.userInformationService.userInformation.energy;
+  }
+
 }

@@ -41,6 +41,10 @@ export class UserInformationService {
     this.currentVillage.resourcesAmounts = resourcesAmounts;
   }
 
+  updateEnergy(energy: number){
+    this.userInformation.energy = energy;
+  }
+
   switchVillage(index: number)
   {
     this.requestVillage(index).subscribe((village: Village)=>{

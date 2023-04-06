@@ -6,4 +6,5 @@ export class User
     joinDate!: Date;
     clanName!: string;
     villages!: Village[];
+    energy!: number;
 }
