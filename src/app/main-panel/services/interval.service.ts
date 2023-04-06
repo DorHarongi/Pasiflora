@@ -3,7 +3,6 @@ import { UserInformationService } from 'src/app/user-information/user-informatio
 import { Village } from '../models/Village';
 import { energyProductionSpeedPerSecond, maxEnergy, warehouseStorageByLevel } from 'utils';
 import { User } from '../models/User';
-import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class IntervalService {
 
   resourceGatheringInterval!: any;
+  getUserInterval!: any;
 
   constructor(private userInformationService: UserInformationService) {
     this.userInformationService.villageChanged$.subscribe(()=>{
@@ -24,16 +24,26 @@ export class IntervalService {
     let self = this;
     document.addEventListener("visibilitychange", function() {
       if (document.hidden) {
-        clearInterval(self.resourceGatheringInterval);
+        self.stopIntervals();
       } else {
-        //todo dont use switch village, make a function for request the entire user.
+        //todo research memory leak when switching tabs quickly
         self.userInformationService.updateUser();
-        self.startResourceGatheringInterval();
+        self.startIntervals();
       }
     });
   }
 
-  startResourceGatheringInterval(): void
+  startIntervals(): void{
+    this.startResourceGatheringInterval();
+    this.startGetUserInterval();
+  }
+
+  stopIntervals(): void{
+    clearInterval(this.resourceGatheringInterval);
+    clearInterval(this.getUserInterval);
+  }
+
+  private startResourceGatheringInterval(): void
   {
     clearInterval(this.resourceGatheringInterval);
     this.resourceGatheringInterval = setInterval(()=>{
@@ -59,5 +69,13 @@ export class IntervalService {
         userInformation.energy = maxEnergy;
 
     }, 1000)
+  }
+
+  private startGetUserInterval() // mainly meant for updating if you got attacked
+  {
+    clearInterval(this.getUserInterval);
+    this.getUserInterval = setInterval(()=>{
+      this.userInformationService.updateUser();
+    }, 1000 * 10)
   }
 }

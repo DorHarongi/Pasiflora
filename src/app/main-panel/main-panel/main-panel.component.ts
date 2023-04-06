@@ -19,7 +19,7 @@ export class MainPanelComponent implements OnInit, OnDestroy {
   constructor(private userInformationService: UserInformationService, private router: Router,
      private intervalService: IntervalService)
   { 
-    this.intervalService.startResourceGatheringInterval();
+    this.intervalService.startIntervals();
   }
 
   ngOnDestroy(): void {
