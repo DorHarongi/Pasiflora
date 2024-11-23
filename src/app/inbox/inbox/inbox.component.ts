@@ -6,6 +6,8 @@ import { UserInformationService } from 'src/app/user-information/user-informatio
 import { ActiveContent } from '../models/activeContent.enum';
 import { AttackReport } from '../models/attackReport';
 
+const WINDOW_SIZE = 6;
+
 @Component({
   selector: 'app-inbox',
   templateUrl: './inbox.component.html',
@@ -20,37 +22,61 @@ export class InboxComponent implements OnInit, OnDestroy {
   //activeContentEnum = ActiveContent;
   //activeContent: ActiveContent = ActiveContent.Reports;
   page: number = 1;
+  numberOfPages: number = 1;
+  displayedPages: number[] = [];
   username: string;
   attackReportsInPage: Array<AttackReport> = [];
   attackReportPopupOpened: boolean = false;
   clickedAttackReport!: AttackReport;
-  subscription!: Subscription;
+  subscription1!: Subscription;
+  subscription2!: Subscription;
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscription1 && this.subscription1.unsubscribe();
+    this.subscription2 && this.subscription2.unsubscribe();
   }
 
   ngOnInit(): void {
+    this.getNumberOfAttackReportPages();
     this.getAttackReports();
   }
 
-  moveToPage(page: number)
+  updateDisplayedPages(): void {
+    const halfWindow = Math.floor(WINDOW_SIZE / 2);
+
+    let start = Math.max(this.page - halfWindow, 1);
+    let end = start + WINDOW_SIZE - 1;
+
+    if (end > this.numberOfPages) {
+      end = this.numberOfPages;
+      start = Math.max(end - WINDOW_SIZE + 1, 1);
+    }
+
+    this.displayedPages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  }
+
+  getNumberOfAttackReportPages(): void
   {
+    this.subscription1 = this.http.get<any>(`http://localhost:3000/reports/attackReports/${this.username}`, 
+    ).subscribe((numberOfPages)=>{
+       this.numberOfPages = numberOfPages;
+       this.updateDisplayedPages();
+   });
+  }
+
+  moveToPage(page: number): void {
+    if (page < 1 || page > this.numberOfPages) return; 
     this.page = page;
     this.getAttackReports();
-  }
-
-  goBack()
-  {
-    this.router.navigateByUrl('home');
+    this.updateDisplayedPages();
   }
 
   getAttackReports()
   {
-    this.subscription = this.http.get<any>(`http://localhost:3000/reports/attackReports/${this.username}/${this.page}`, 
+    this.subscription2 = this.http.get<any>(`http://localhost:3000/reports/attackReports/${this.username}/${this.page}`, 
      ).subscribe((attackReports)=>{
         this.attackReportsInPage = attackReports;
-    })
+    });
   }
 
   openAttackReportPopup(clickedAttackReport: AttackReport)
@@ -95,6 +121,11 @@ export class InboxComponent implements OnInit, OnDestroy {
 
   attackReportPopupClosed(){
     this.attackReportPopupOpened = false;
+  }
+
+  goBack()
+  {
+    this.router.navigateByUrl('home');
   }
 
 }

@@ -60,18 +60,13 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     this.displayedPages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
 
-  goBack()
-  {
-    this.router.navigateByUrl('home');
-  }
-  
   getNumberOfUserStatisticsPages()
   {
     this.subscription2 = this.http.get<number>(`http://localhost:3000/users/statistics`, 
     ).subscribe((numberOfPages)=>{
        this.numberOfPages = numberOfPages;
        this.updateDisplayedPages();
-   })
+   });
   }
 
   getUserStatistics()
@@ -94,6 +89,11 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   getEnergy(): number
   {
     return this.userInformationService.userInformation.energy;
+  }
+
+  goBack()
+  {
+    this.router.navigateByUrl('home');
   }
 
 }
